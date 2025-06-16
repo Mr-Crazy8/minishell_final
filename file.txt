@@ -1,0 +1,64 @@
+cat > /dev/null
+
+ctrl+c;
+
+
+check_leaks >?? 
+cat << t | cat << n
+
+
+ minishell $> << EOF cat | grep "hello   "
+fd_heredoc 1 =====> [3]
+fd_heredoc 2 =====> [5]
+fd 1 =====> [3]
+fd 2 =====> [5]
+max_heredoc_checker
+heredoc
+> hyohkyo
+> hello
+> EOF
+^C
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+env | grep hola;;
+
+export -HOLA;;
+
+for export and env ;;;
+
+ unset PATHc
+ ls
+
+ page 13;;;
+ 
+
+
+
+while true; do lsof -c minishell; sleep 1; clear; done
+
+
+leaks fd pipe()
+while true;  do  lsof -p 53576; sleep 1; clear ;done
+
+
+
+
+
+
+
+
+chof export odak is_not active chkon fihom khdam ;
+ochof signals exit status;

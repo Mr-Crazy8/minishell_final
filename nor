@@ -1,0 +1,3 @@
+parsing/expand.c: Error!
+Error: TOO_MANY_LINES       (line:  73, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 187, col:   1):	Function has more than 25 lines
