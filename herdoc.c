@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoakouh <ayoakouh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:30:57 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/14 12:22:26 by ayoakouh         ###   ########.fr       */
+/*   Updated: 2025/06/16 14:58:26 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void check_here_doc(t_cmd *cmd, t_env *env)
 	pid_t pid;
 
 	if (max_heredoc_checker(cmd))
-		return;
+		exit(2);
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
 	while (tmp)
@@ -137,12 +137,11 @@ void check_here_doc(t_cmd *cmd, t_env *env)
 
 void heredoc(char *delmeter, t_env *env, int exit_status, char *orig_delimiter, int fd)
 {
-	printf("heredoc\n");
 	char *line;
 	char *heredoc;
 	char *tmp1;
 	char *tmp2;
-	char *processed_delimiter =  ft_strdup(delmeter);
+	char *processed_delimiter = heredoc_delemter(ft_strdup(orig_delimiter));
 	// int count = 0;
 	heredoc = NULL;
 

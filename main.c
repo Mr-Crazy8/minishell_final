@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoakouh <ayoakouh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:35:13 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/15 18:37:11 by ayoakouh         ###   ########.fr       */
+/*   Updated: 2025/06/16 16:17:29 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -678,6 +678,7 @@ int main(int argc, char *argv[], char *env[])
 			change_back_cmd(cmd);
 			file_opener(cmd, env_struct);
 			print_ambiguous_redir_errors(cmd);
+			print_cmd(cmd);
 			check_line(&cmd, &env_struct, env);
 			free_cmd_list(cmd);
 			global_sig = 0;

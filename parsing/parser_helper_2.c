@@ -6,22 +6,11 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:17:43 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/15 15:24:57 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:41:57 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-void	process_redir_hp(char *str, int *start, int *i, int *after_operator)
-{
-	if (str[(*start)] == '>' && str[(*i)] == '>')
-		(*i)++;
-	else if (str[(*start)] == '<' && str[(*i)] == '<')
-		(*i)++;
-	(*after_operator) = (*i);
-	while (str[(*i)] == ' ')
-		(*i)++;
-}
 
 static char	*process_redir(char *str, int *pos)
 {
@@ -49,24 +38,6 @@ static char	*process_redir(char *str, int *pos)
 	}
 	*pos = i;
 	return (ft_substr(str, start, i - start));
-}
-
-void	process_redir_helper(char str, int *quote_state)
-{
-	if (str == '\'')
-	{
-		if ((*quote_state) == 0)
-			(*quote_state) = 1;
-		else if ((*quote_state) == 1)
-			(*quote_state) = 0;
-	}
-	else if (str == '\"')
-	{
-		if ((*quote_state) == 0)
-			(*quote_state) = 2;
-		else if ((*quote_state) == 2)
-			(*quote_state) = 0;
-	}
 }
 
 static int	find_redir(char *str, int i)

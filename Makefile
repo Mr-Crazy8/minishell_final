@@ -6,20 +6,23 @@ CFLAGS = -Wall  -g -fsanitize=address #--analyze
 NAME = minishell
 
 # Source files
-SRCS = exc_cmd.c parsing/ft_split.c libft_utils.c echo.c \
+SRCS = exc_cmd.c  libft_utils.c echo.c \
 		ft_unset.c ft_exit.c env.c export.c ft_cd.c pwd.c \
-		env_null.c redrction.c parsing/add_back_func.c         parsing/lexer_helper_0.c \
-		parsing/debugging_tools.c       parsing/lexer_helper_1.c \
-		parsing/parser.c     parsing/parser_helper.c     ft_pipe.c    parsing/expand_utils.c\
-		parsing/expand.c \
-		parsing/expand_helper_0.c       parsing/parser_helper_2.c parsing/parsing_main.c\
-		parsing/expand_helper_1.c       parsing/parser_helper_4.c parsing/expand_utils_4.c\
-		parsing/free_func.c              main.c parsing/open_files.c parsing/expand_utils_5.c\
-		parsing/expand_utils_6.c           parsing/parsing_utiles.c\
-		parsing/free_func_1.c           parsing/syntx_check.c parsing/Ambiguous.c\
-		parsing/ft_itoa.c               parsing/syntx_check_helper_0.c parsing/Ambiguous_helper.c\
-		parsing/lexer.c                 parsing/syntx_check_helper_1.c   Heredoc_Expansion.c\
-		herdoc.c parsing/expand_utils_7.c\
+		env_null.c redrction.c   herdoc.c    ft_pipe.c   main.c  \
+		Heredoc_Expansion.c \
+		parsing/Ambiguous.c             parsing/expand_helper_0.c       parsing/expand_utils_5.c  		\
+		parsing/free_func.c             parsing/lexer_helper_0.c        parsing/parser_helper.c     	\
+		parsing/parsing_utiles.c parsing/Ambiguous_helper.c      parsing/expand_helper_1.c       		\
+		parsing/expand_utils_6.c        parsing/free_func_1.c           parsing/lexer_helper_1.c  		\
+		parsing/parser_helper_2.c       parsing/syntx_check.c parsing/add_back_func.c         			\
+		parsing/expand_helper_10.c      parsing/expand_utils_7.c        parsing/ft_itoa.c     			\
+		parsing/open_files.c            parsing/parser_helper_3.c       parsing/syntx_check_helper_0.c  \
+		parsing/debugging_tools.c       parsing/expand_utils.c          parsing/expand_utils_8.c        \
+		parsing/ft_split.c              parsing/parser.c                parsing/parser_helper_4.c       \
+		parsing/syntx_check_helper_1.c parsing/expand.c                parsing/expand_utils_4.c         \
+		parsing/expand_utils_9.c        parsing/lexer.c                 parsing/parser_0.c              \
+		parsing/parsing_main.c
+		
 # Object files
 OBJS = $(SRCS:.c=.o)
 

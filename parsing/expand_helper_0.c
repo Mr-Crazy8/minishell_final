@@ -6,51 +6,20 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 11:21:05 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/15 11:34:21 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/16 20:19:48 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	process_quote_char(char c, int *quote_state,
-	char *new_str, int *j, int remove_mode)
+int	selective_hp(char *str, int *i, int *quote_state)
 {
-	if (c == '\'')
+	if ((str[(*i)] == '\'' && *quote_state == 2)
+		|| (str[(*i)] == '\"' && *quote_state == 1))
 	{
-		if (*quote_state == 0)
-			*quote_state = 1;
-		else if (*quote_state == 1)
-			*quote_state = 0;
-		if (remove_mode == 0)
-			new_str[(*j)++] = c;
-		return (1);
-	}
-	else if (c == '\"')
-	{
-		if (*quote_state == 0)
-			*quote_state = 2;
-		else if (*quote_state == 2)
-			*quote_state = 0;
-		if (remove_mode == 0)
-			new_str[(*j)++] = c;
 		return (1);
 	}
 	return (0);
-}
-
-char	*allocate_and_init(char *str, int *i, int *j, int *quote_state)
-{
-	char	*new_str;
-
-	*i = 0;
-	*j = 0;
-	*quote_state = 0;
-	if (!str)
-		return (NULL);
-	new_str = malloc(strlen(str) + 1);
-	if (!new_str)
-		return (NULL);
-	return (new_str);
 }
 
 char	*selective_remove_quotes(char *str, int remove_mode)
@@ -67,8 +36,7 @@ char	*selective_remove_quotes(char *str, int remove_mode)
 	while (str[i])
 	{
 		in_opposite_quote = 0;
-		if ((str[i] == '\'' && quote_state == 2)
-			|| (str[i] == '\"' && quote_state == 1))
+		if (selective_hp(str, &i, &quote_state) == 1)
 		{
 			new_str[j++] = str[i++];
 			in_opposite_quote = 1;
@@ -80,8 +48,7 @@ char	*selective_remove_quotes(char *str, int remove_mode)
 		else
 			i++;
 	}
-	new_str[j] = '\0';
-	return (new_str);
+	return (new_str[j] = '\0', new_str);
 }
 
 void	processed_cmd(t_cmd *current, char	*processed)
@@ -122,31 +89,4 @@ void	processed_redir(t_redir *redir, char *processed)
 {
 	free(redir->file);
 	redir->file = processed;
-}
-
-void	process_quotes_for_cmd(t_cmd *cmd_list, int remove_mode)
-{
-	t_cmd		*current;
-	t_redir		*redir;
-	char		*processed;
-	int			i;
-
-	current = cmd_list;
-	while (current)
-	{
-		process_quotes_for_cmd_hp(current, &i, remove_mode);
-		redir = current->redirs;
-		while (redir)
-		{
-			if (redir->file)
-			{
-				processed = selective_remove_quotes(
-						redir->file, remove_mode);
-				if (processed)
-					processed_redir(redir, processed);
-			}
-			redir = redir->next;
-		}
-		current = current->next;
-	}
 }

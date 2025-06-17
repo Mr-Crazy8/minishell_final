@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/19 11:26:07 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/15 17:17:51 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/16 19:51:40 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,26 +66,30 @@ void	check_missing_filename(char *str)
 	}
 }
 
-void	print_error(char *str, int *i)
+void	process_filename_characters(char *str, int *i, int *quote_state)
 {
-	if (str[(*i)] == '\0')
-		write(2, "minishell: syntax error near unexpected token `newline'\n",
-			57);
-	else if (str[(*i)] == '|')
-		write(2, "minishell: syntax error near unexpected token `|'\n",
-			51);
-	else if (str[(*i)] == '>' && str[(*i) + 1] == '>')
-		write(2, "minishell: syntax error near unexpected token `>>'\n",
-			52);
-	else if (str[(*i)] == '>')
-		write(2, "minishell: syntax error near unexpected token `>'\n",
-			51);
-	else if (str[(*i)] == '<' && str[(*i) + 1] == '<')
-		write(2, "minishell: syntax error near unexpected token `<<'\n",
-			52);
-	else if (str[(*i)] == '<')
-		write(2, "minishell: syntax error near unexpected token `<'\n",
-			51);
+	while (str[(*i)])
+	{
+		if (str[(*i)] == '\'')
+		{
+			if (*quote_state == 0)
+				*quote_state = 1;
+			else if (*quote_state == 1)
+				*quote_state = 0;
+		}
+		else if (str[(*i)] == '"')
+		{
+			if (*quote_state == 0)
+				*quote_state = 2;
+			else if (*quote_state == 2)
+				*quote_state = 0;
+		}
+		if (*quote_state == 0 && (str[(*i)] == ' '
+				|| str[(*i)] == '>' || str[(*i)] == '<'
+				|| str[(*i)] == '|'))
+			break ;
+		(*i)++;
+	}
 }
 
 int	invalid_filename_checker(char *str, int *i)
@@ -110,28 +114,7 @@ int	invalid_filename_checker(char *str, int *i)
 	}
 	else
 	{
-		while (str[(*i)])
-		{
-			if (str[(*i)] == '\'')
-			{
-				if (quote_state == 0)
-					quote_state = 1;
-				else if (quote_state == 1)
-					quote_state = 0;
-			}
-			else if (str[(*i)] == '"')
-			{
-				if (quote_state == 0)
-					quote_state = 2;
-				else if (quote_state == 2)
-					quote_state = 0;
-			}
-			if (quote_state == 0 && (str[(*i)] == ' '
-					|| str[(*i)] == '>' || str[(*i)] == '<'
-					|| str[(*i)] == '|'))
-				break ;
-			(*i)++;
-		}
+		process_filename_characters(str, i, &quote_state);
 	}
 	return (0);
 }

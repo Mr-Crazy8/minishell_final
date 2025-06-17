@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:55:39 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/15 14:58:09 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:23:33 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,19 @@ void	free_cmd_list(t_cmd *cmd_list)
 		}
 		free(current);
 		current = next;
+	}
+}
+
+void	free_expanded(t_exp_helper *expand)
+{
+	if (expand)
+	{
+		if (expand->expanded)
+			free(expand->expanded);
+		if (expand->var_name)
+			free(expand->var_name);
+		if (expand->var_value)
+			free(expand->var_value);
+		free(expand);
 	}
 }

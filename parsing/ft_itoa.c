@@ -6,13 +6,13 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:03:24 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/15 15:03:42 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:26:56 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	get_num_length(long num)  /// recode this 
+int	get_num_length(long num)
 {
 	int	length;
 

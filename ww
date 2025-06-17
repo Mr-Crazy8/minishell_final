@@ -1,0 +1,8 @@
+void cmd_extracter_hp_1(char *str, int *quote_state, int *i, int *result_len, char *result);
+void cmd_extracter_hp_2(char *str, int *i, char *result, int *result_len, int quote_state);
+void preprocess_cmd_hp_1(char *input, int *i, int *in_quotes, char *result, int *j);
+int	 process_quote_char(char c, int *quote_state, char *new_str, int *j, int remove_mode);
+int	preprocess_cmd_hp_0(char *input, int *i, int *in_quotes, char *result, int *j);
+int	split_string_q_hp1(char **split, size_t *i, size_t *j, size_t *start, char const *s);
+int	preprocess_cmd_hp_2(char *input, int *i, int *in_quotes, char *result, int *j);
+int rebuild_cmd_args(char **new_args, t_cmd *current, char **split, int i, int word_count);

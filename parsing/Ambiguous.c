@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 10:15:39 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/15 17:23:55 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:36:48 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ void	ambiguous_checker_helper(t_redir *tmp)
 	tp = tmp->file;
 	tmp->file = ft_strtrim(tmp->file, " ");
 	free(tp);
+}
+
+void	ambiguous_hp(t_redir *tmp)
+{
+	if (!tmp->file || tmp->file[0] == '\0')
+		tmp->ambiguous = 1;
+	else if (tmp->file && check_for_space(tmp->file) == 1
+		&& tmp->orig_token[0] == '$')
+		tmp->ambiguous = 1;
+	else
+		ambiguous_checker_helper(tmp);
 }
 
 void	ambiguous_checker(t_redir *redir)
@@ -40,13 +51,7 @@ void	ambiguous_checker(t_redir *redir)
 				tmp = tmp->next;
 				continue ;
 			}
-			if (!tmp->file || tmp->file[0] == '\0')
-				tmp->ambiguous = 1;
-			else if (tmp->file && check_for_space(tmp->file) == 1
-				&& tmp->orig_token[0] == '$')
-				tmp->ambiguous = 1;
-			else
-				ambiguous_checker_helper(tmp);
+			ambiguous_hp(tmp);
 		}
 		tmp = tmp->next;
 	}

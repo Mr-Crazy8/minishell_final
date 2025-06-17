@@ -179,7 +179,7 @@
 // void free_cmd_list(t_cmd *cmd_list);
 // void	free_token_list(t_token *token_list);
 // /// HNa 
-
+char *heredoc_delemter(char *orig_token);
 char	*ft_strchr(char *s, int c);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
