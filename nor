@@ -6,10 +6,8 @@ parsing/open_files.c: Error!
 Error: TOO_MANY_LINES       (line:  72, col:   1):	Function has more than 25 lines
 Error: TOO_MANY_LINES       (line: 146, col:   1):	Function has more than 25 lines
 parsing/parser.c: Error!
-Error: CONSECUTIVE_NEWLINES (line:  15, col:   1):	Consecutive newlines
-Error: CONSECUTIVE_NEWLINES (line:  16, col:   1):	Consecutive newlines
-Error: TOO_MANY_ARGS        (line:  18, col:  43):	Function has more than 4 arguments
-Error: TOO_MANY_LINES       (line:  46, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_ARGS        (line:  16, col:  43):	Function has more than 4 arguments
+Error: TOO_MANY_LINES       (line:  44, col:   1):	Function has more than 25 lines
 parsing/parser_0.c: Error!
 Error: TOO_MANY_LINES       (line:  54, col:   1):	Function has more than 25 lines
 Error: TOO_MANY_ARGS        (line:  93, col:  46):	Function has more than 4 arguments
@@ -18,6 +16,10 @@ parsing/parser_helper.c: Error!
 Error: TOO_MANY_ARGS        (line: 100, col:  34):	Function has more than 4 arguments
 Error: TOO_MANY_FUNCS       (line: 117, col:   1):	Too many functions in file
 Error: TOO_MANY_FUNCS       (line: 145, col:   1):	Too many functions in file
+parsing/parser_helper_2.c: Error!
+Error: SPACE_REPLACE_TAB    (line:  45, col:   8):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  45, col:  21):	Declaration and assignation on a single line
+Error: SPACE_EMPTY_LINE     (line:  46, col:   1):	Space on empty line
 parsing/parsing.h: Error!
 Error: CONSECUTIVE_NEWLINES (line: 125, col:   1):	Consecutive newlines
 Error: TOO_MANY_ARGS        (line: 142, col:  51):	Function has more than 4 arguments

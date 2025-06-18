@@ -6,36 +6,36 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 11:16:14 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/16 15:16:34 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:30:21 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
 int	rebuild_cmd_args(char **new_args, t_cmd *current, char **split,
-					int i, int word_count)
+					t_add_int	*two_numbers)
 {
 	int	j;
 	int	arg_count;
 
 	j = 1;
 	arg_count = ft_lint(current->args);
-	new_args[i] = strdup(split[0]);
-	while (j < word_count)
+	new_args[two_numbers->number_1] = strdup(split[0]);
+	while (j < two_numbers->number_2)
 	{
-		new_args[i + j] = strdup(split[j]);
+		new_args[two_numbers->number_1 + j] = strdup(split[j]);
 		j++;
 	}
-	j = i + 1;
+	j = two_numbers->number_1 + 1;
 	while (j < arg_count)
 	{
-		new_args[j + word_count - 1] = current->args[j];
+		new_args[j + two_numbers->number_2 - 1] = current->args[j];
 		j++;
 	}
-	new_args[arg_count + word_count - 1] = NULL;
+	new_args[arg_count + two_numbers->number_2 - 1] = NULL;
 	free(current->args);
 	current->args = new_args;
-	return (i + word_count - 1);
+	return (two_numbers->number_1 + two_numbers->number_2 - 1);
 }
 
 void	split_the_rest_helper(t_cmd *current, int *i)
@@ -54,7 +54,7 @@ void	split_the_rest_helper(t_cmd *current, int *i)
 		{
 			prepare_new_args(new_args, current, (*i));
 			(*i) = rebuild_cmd_args(new_args, current, split,
-					(*i), word_count);
+					add_two_int((*i), word_count));
 		}
 	}
 	if (split)

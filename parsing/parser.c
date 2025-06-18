@@ -6,13 +6,11 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:47:25 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/16 16:14:48 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:16:13 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-
 
 void	cmd_extracter_hp_1(char *str, int *quote_state, int *i,
 			int *result_len, char *result)

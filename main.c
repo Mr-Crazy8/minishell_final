@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:35:13 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/16 16:17:29 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:10:11 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -640,7 +640,9 @@ int main(int argc, char *argv[], char *env[])
 		if (!input)
 		{
 			printf("exit\n");
-			exit(0);
+			if(!cmd || !cmd->data.exit_status)
+				exit(0);
+			exit(cmd->data.exit_status);
 		}
 		// if (global_sig == 2 && input[0] == '\0')
 		// {
@@ -680,7 +682,7 @@ int main(int argc, char *argv[], char *env[])
 			print_ambiguous_redir_errors(cmd);
 			print_cmd(cmd);
 			check_line(&cmd, &env_struct, env);
-			free_cmd_list(cmd);
+			// free_cmd_list(cmd);
 			global_sig = 0;
 		}
 		else if (error_pipi(token_list)  || check_syntax_errors(token_list))/// must stay

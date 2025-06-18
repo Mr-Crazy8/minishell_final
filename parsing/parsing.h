@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:46:36 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/17 10:20:14 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:33:00 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ typedef struct s_add_int_pointer
 
 typedef struct s_add_int
 {
-	int		exit_status;
-	int		pipe_out;
+	int		number_1;
+	int		number_2;
 }	t_add_int;
 
 typedef struct s_add_char
@@ -256,8 +256,8 @@ int				error_pipi(t_token *token_list);
 int				check_syntax_errors(t_token *token_list);
 int				get_or_set(int type, int status);
 int				is_valid_key(char *key);
-int				rebuild_cmd_args(char **new_args, t_cmd *current, char **split,
-					int i, int word_count);
+int	rebuild_cmd_args(char **new_args, t_cmd *current, char **split,
+					t_add_int	*two_numbers);
 t_token			*creat_token(char *data, char *token_type);
 t_token			*special_character_handle(char *input, int *i);
 t_token			*tokin_list_maker(char *input);

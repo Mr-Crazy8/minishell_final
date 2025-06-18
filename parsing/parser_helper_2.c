@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:17:43 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/16 19:41:57 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/17 12:14:06 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,19 @@ static char	*process_redir(char *str, int *pos)
 
 static int	find_redir(char *str, int i)
 {
+	int quote_state = 0;
+	
 	while (str && str[i])
 	{
-		if ((str[i] == '\'' && str[ft_strlen(str) - 1] == '\''))
-			break ;
-		else if ((str[i] == '\"' && str[ft_strlen(str) - 1] == '\"'))
-			break ;
-		else if (str[i] == '<' || str[i] == '>')
+		if (str[i] == '\'' && quote_state == 0)
+			quote_state = 1;
+		else if (str[i] == '\'' && quote_state == 1)
+			quote_state = 0;
+		else if (str[i] == '\"' && quote_state == 0)
+			quote_state = 2;
+		else if (str[i] == '\"' && quote_state == 2)
+			quote_state = 0;
+		else if (quote_state == 0 && (str[i] == '<' || str[i] == '>'))
 			return (i);
 		i++;
 	}

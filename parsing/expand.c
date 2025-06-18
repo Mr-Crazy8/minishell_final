@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 14:20:59 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/17 12:00:42 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:13:49 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	handle_empty_var(t_cmd *current, t_exp_helper *expand, int *i, int *j)
 {
-
 	if ((expand->expanded && expand->expanded[0] == '\0'
-		&& strchr(current->args[(*i)], '$')) )
+			&& strchr(current->args[(*i)], '$')))
 	{
 		free(current->args[(*i)]);
 		free(expand->expanded);
