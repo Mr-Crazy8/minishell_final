@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 11:51:19 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/16 15:18:11 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/19 11:45:13 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,39 +83,35 @@ void	shift_arrays_left(t_cmd *current, int *i, int *j)
 	current->args[(*j)] = NULL;
 }
 
-int	process_quote_char(char c, int *quote_state,
-	char *new_str, int *j, int remove_mode)
+int	process_quote_char(char c, t_quote_params	*qoute_param)
 {
 	if (c == '\'')
 	{
-		if (*quote_state == 0)
-			*quote_state = 1;
-		else if (*quote_state == 1)
-			*quote_state = 0;
-		if (remove_mode == 0)
-			new_str[(*j)++] = c;
+		if ((qoute_param->quote_state) == 0)
+			(qoute_param->quote_state) = 1;
+		else if ((qoute_param->quote_state) == 1)
+			(qoute_param->quote_state) = 0;
+		if (qoute_param->remove_mode == 0)
+			qoute_param->new_str[(qoute_param->j)++] = c;
 		return (1);
 	}
 	else if (c == '\"')
 	{
-		if (*quote_state == 0)
-			*quote_state = 2;
-		else if (*quote_state == 2)
-			*quote_state = 0;
-		if (remove_mode == 0)
-			new_str[(*j)++] = c;
+		if ((qoute_param->quote_state) == 0)
+			(qoute_param->quote_state) = 2;
+		else if ((qoute_param->quote_state) == 2)
+			(qoute_param->quote_state) = 0;
+		if (qoute_param->remove_mode == 0)
+			qoute_param->new_str[(qoute_param->j)++] = c;
 		return (1);
 	}
 	return (0);
 }
 
-char	*allocate_and_init(char *str, int *i, int *j, int *quote_state)
+char	*allocate_and_init(char *str)
 {
 	char	*new_str;
 
-	*i = 0;
-	*j = 0;
-	*quote_state = 0;
 	if (!str)
 		return (NULL);
 	new_str = malloc(strlen(str) + 1);

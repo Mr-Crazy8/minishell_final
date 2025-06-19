@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 11:16:14 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/18 14:30:21 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:45:56 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ int	rebuild_cmd_args(char **new_args, t_cmd *current, char **split,
 
 void	split_the_rest_helper(t_cmd *current, int *i)
 {
-	char	**split;
-	int		word_count;
-	char	**new_args;
+	char		**split;
+	int			word_count;
+	char		**new_args;
+	t_add_int	*two_numbers;
 
 	split = split_if_needed(current->args[(*i)]);
 	if (split && split[1])
@@ -53,8 +54,9 @@ void	split_the_rest_helper(t_cmd *current, int *i)
 		if (new_args)
 		{
 			prepare_new_args(new_args, current, (*i));
-			(*i) = rebuild_cmd_args(new_args, current, split,
-					add_two_int((*i), word_count));
+			two_numbers = add_two_int((*i), word_count);
+			(*i) = rebuild_cmd_args(new_args, current, split, two_numbers);
+			free(two_numbers);
 		}
 	}
 	if (split)

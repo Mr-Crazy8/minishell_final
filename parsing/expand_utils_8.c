@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:08:09 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/18 14:27:48 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/18 17:47:24 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,4 @@ t_exp_helper	*alloc_expand(void)
 	expand->var_value = NULL;
 	expand->had_removed_var = 0;
 	return (expand);
-}
-
-t_add_int	*add_two_int(int number_1, int number_2)
-{
-	t_add_int	*two_number;
-
-	two_number = malloc(sizeof(t_add_int));
-	if (!two_number)
-		return (NULL);
-	two_number->number_1 = number_1;
-	two_number->number_2 = number_2;
-	return (two_number);
 }

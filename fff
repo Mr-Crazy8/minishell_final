@@ -1,0 +1,4 @@
+Error: TOO_MANY_LINES       (line:  72, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line: 146, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line:  44, col:   1):	Function has more than 25 lines
+Error: TOO_MANY_LINES       (line:  54, col:   1):	Function has more than 25 lines

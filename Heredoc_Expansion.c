@@ -1,8 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Heredoc_Expansion.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/19 12:29:41 by anel-men          #+#    #+#             */
+/*   Updated: 2025/06/19 16:44:38 by anel-men         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-
-
-
 
 static char	*add(char const *s1, char const *s2)
 {
@@ -45,77 +53,77 @@ char	*ft_strjoin(char const *s1, char const *s2)
 }
 
 
-char *random_dir(void)
+char	*random_dir(void)
 {
-	char **dir;
-	int fd;
-	unsigned char *raw_bytes;
-	char *result;
-	int dir_size = 14; 
-	static int i = 0;
-	unsigned int index;
-	int j = 0;
+	//put_in_struct++++++++++++++++++++++++++++++++++++++++++++
+	char			**dir;
+	int				fd;
+	unsigned char	*raw_bytes;
+	char			*result;
+	int				dir_size; 
+	static int		i;
+	unsigned int	index;
+	int				j;
+	//put_in_struct++++++++++++++++++++++++++++++++++++++++++++
+	dir_size = 14;
+	i = 0;
+	j = 0;
 	raw_bytes = malloc(sizeof(unsigned char) * 5);
-	if (raw_bytes == NULL) {
+	if (raw_bytes == NULL) 
 		return NULL;
-	}
+	//func_00++++++++++++++++++++++++++++++++++++++++++++
 	dir = malloc(sizeof(char *) * (dir_size + 1));
-	if (dir == NULL) {
-		free(raw_bytes);
-		return NULL;
-	}
-
-	dir[0] = strdup("/mnt/homes/ayoakouh/");
-	dir[1] = strdup("/mnt/homes/ayoakouh/Pictures/");
-	dir[2] = strdup("/mnt/homes/ayoakouh/Library/Application Support/");
+	if (dir == NULL)
+		return (free(raw_bytes), NULL);
+	dir[0] = strdup("/mnt/homes/anel-men/");
+	dir[1] = strdup("/mnt/homes/anel-men/Pictures/");
+	dir[2] = strdup("/mnt/homes/anel-men/Library/Application Support/");
 	dir[3] = strdup("/tmp/");
 	dir[4] = strdup("/var/tmp/");
 	dir[5] = strdup("/Users/Shared/");
-	dir[6] = strdup("/mnt/homes/ayoakouh/Desktop/");
-	dir[7] = strdup("/mnt/homes/ayoakouh/Documents/");
-	dir[8] = strdup("/mnt/homes/ayoakouh/Downloads/");
-	dir[9] = strdup("/mnt/homes/ayoakouh/Library/");
-	dir[10] = strdup("/mnt/homes/ayoakouh/Library/Caches/");
-	dir[11] = strdup("/mnt/homes/ayoakouh/Library/Preferences/");
-	dir[12] = strdup("/mnt/homes/ayoakouh/Movies/");
-	dir[13] = strdup("/mnt/homes/ayoakouh/Music/");
+	dir[6] = strdup("/mnt/homes/anel-men/Desktop/");
+	dir[7] = strdup("/mnt/homes/anel-men/Documents/");
+	dir[8] = strdup("/mnt/homes/anel-men/Downloads/");
+	dir[9] = strdup("/mnt/homes/anel-men/Library/");
+	dir[10] = strdup("/mnt/homes/anel-men/Library/Caches/");
+	dir[11] = strdup("/mnt/homes/anel-men/Library/Preferences/");
+	dir[12] = strdup("/mnt/homes/anel-men/Movies/");
+	dir[13] = strdup("/mnt/homes/anel-men/Music/");
 	dir[14] = NULL;
-
+	//func_00++++++++++++++++++++++++++++++++++++++++++++
+	//func_01++++++++++++++++++++++++++++++++++++++++++++
 	fd = open("/dev/urandom", O_RDONLY);
-	if (fd == -1) {
+	if (fd == -1)
+	{
 		write(2, "Error opening /dev/urandom\n", 27);
-		
 		while (j < dir_size) 
 		{
-			if (dir[j] != NULL) {
+			if (dir[j] != NULL)
 				free(dir[j]);
-			}
 			j++;
 		}
 		free(dir);
 		free(raw_bytes);
-		
-		return NULL;
+		return (NULL);
 	}
-
+	//func_01++++++++++++++++++++++++++++++++++++++++++++
+	//func_02++++++++++++++++++++++++++++++++++++++++++++
 	if (read(fd, raw_bytes, 5) != 5) 
 	{
 		close(fd);
-
 		j = 0;
 		while (j < dir_size) 
 		{
 			if (dir[j] != NULL) 
-			{
 				free(dir[j]);
-			}
 			j++;
 		}
 		free(dir);
 		free(raw_bytes);
-		
 		return NULL;
 	}
+	//func_02++++++++++++++++++++++++++++++++++++++++++++
+	//func_03++++++++++++++++++++++++++++++++++++++++++++
 	index = raw_bytes[i] % dir_size;
 	i = (i + 1) % 5;
 	result = strdup(dir[index]);
@@ -123,26 +131,25 @@ char *random_dir(void)
 	j = 0;
 	while (j < dir_size) 
 	{
-		if (dir[j] != NULL) {  /* Added null check for safety */
+		if (dir[j] != NULL)
 			free(dir[j]);
-		}
 		j++;
 	}
 	free(dir);
 	free(raw_bytes);
-	
 	return result;
+	//func_03++++++++++++++++++++++++++++++++++++++++++++
 }
-char *random_file_name(void)
+char	*random_file_name(void)
 {
-	int fd;
-	unsigned char *raw_bytes;
-	char *rstring;
-	int count;
-	int i;
+	int				fd;
+	unsigned char	*raw_bytes;
+	char			*rstring;
+	int				count;
+	int				i;
+	
 	raw_bytes = malloc(sizeof(unsigned char) * 13);
 	rstring = malloc(sizeof(char) * 13);
-	
 	if (!raw_bytes || !rstring) 
 	{
 		if (raw_bytes)
@@ -192,23 +199,18 @@ char *random_file_name(void)
 	free(rstring2);
 	return rstring_final;
 }
-int *heredoc_opener(void)
+
+int	*heredoc_opener(void)
 {
-	char *random_name;
-	int *fd_heredoc; // Change from array to dynamically allocated memory
+	char	*random_name;
+	int		*fd_heredoc;
 	
 	random_name = random_file_name();
-	
-	// Allocate memory for the array
 	fd_heredoc = malloc(2 * sizeof(int));
-	if (!fd_heredoc) {
-		free(random_name);
-		return NULL; // Return NULL on allocation failure
-	}
-
-	// printf("random_name %s\n", random_name);
-
-	if (random_name) {
+	if (!fd_heredoc) 
+		return (free(random_name), NULL);
+	if (random_name) 
+	{
 		fd_heredoc[0] = open(random_name, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		fd_heredoc[1] = open(random_name, O_CREAT | O_RDONLY, 0644);
 		unlink(random_name);
@@ -217,55 +219,8 @@ int *heredoc_opener(void)
 	return fd_heredoc;
 }
 
-
-
-
-
-
-
-
-
-
-// void heredoc_delemter(t_cmd *cmd_list) /// 2
-// {
-//     t_cmd *tmp = cmd_list;
-//     char *new_delemter;
-//     while (tmp)
-//     {
-//         t_redir *redir = tmp->redirs;
-//         while (redir)
-//         {
-//             if (redir->type == 3) // Heredoc
-//             {
-//                 if (!was_delimiter_quoted(redir->orig_token))
-//                 {
-//                     if (redir->orig_token[0] == '$')
-//                     {
-//                         new_delemter = check_for_doller(redir->orig_token);
-//                         free(redir->orig_token);
-//                         redir->orig_token = new_delemter;
-//                     }
-//                     else 
-//                     {
-//                         new_delemter = selective_remove_quotes(redir->orig_token, 1);
-//                         free(redir->orig_token);
-//                         redir->orig_token = new_delemter;
-//                     }
-//                 }
-//             }
-//             redir = redir->next;
-//         }
-//         tmp = tmp->next;
-//     }
-// }
-
-
-
-
-
-int was_delimiter_quoted(char *orig_token)
+int	was_delimiter_quoted(char *orig_token)
 {
-	// Check if original delimiter had quotes
 	if (orig_token && 
 		((orig_token[0] == '\'' && orig_token[strlen(orig_token)-1] == '\'') ||
 		 (orig_token[0] == '\"' && orig_token[strlen(orig_token)-1] == '\"')))
@@ -273,62 +228,40 @@ int was_delimiter_quoted(char *orig_token)
 	return 0;
 }
 
-
-//for this func my logic it to count fo $ and if  is even (doller % 2 == 0)
-//i will just remove the quotes with selective_remove_quotes
-//else i will use sudstr func to creat new string from tab 1 not 0 so 
-//if we have $$$ the new string will have $$
-char *check_for_doller(char *orig_token)
+char	*check_for_doller(char *orig_token)
 {
-	int doller = 0;
+	char *substr;
+	char *result;
+	int doller;
+	
+	doller = 0;
 	while (orig_token[doller] != '\0' && orig_token[doller] == '$')
 		doller++;
-
 	if (orig_token[doller] != '\0' && (orig_token[doller] == '\'' || orig_token[doller] == '\"'))
 	{
 		if (doller % 2 == 0)
-		   return selective_remove_quotes(orig_token, 1);
-		else {
-			// For odd number of dollars, remove one dollar and then process
-			char *substr = ft_substr(orig_token, 1, strlen(orig_token) - 1);
-			char *result = selective_remove_quotes(substr, 1);
+		   return (selective_remove_quotes(orig_token, 1));
+		else 
+		{
+
+			substr = ft_substr(orig_token, 1, ft_strlen(orig_token) - 1);
+			result = selective_remove_quotes(substr, 1);
 			free(substr);
-			return result;
+			return (result);
 		}
 	}
-	return orig_token;
+	return (orig_token);
 }
 
-
-
-// char *heredoc_delemter(char *orig_token) ///0
-// {
-//     char *new_delemter;
-
-//     if (!orig_token)
-//         return NULL;
-//     if (was_delimiter_quoted(orig_token) == 0)
-//     {
-//         if (orig_token[0] == '$')
-//         {
-//             new_delemter = check_for_doller(orig_token);
-//         }
-//         else 
-//         {
-//             new_delemter = selective_remove_quotes(orig_token, 1);
-//         }
-		
-//         return new_delemter;
-//     }
-//     return ft_strdup(orig_token);
-// }
-
-
-int check_for_quotes(char *str)
+int	check_for_quotes(char *str)
 {
-	int i = 0;
-	int count_signal = 0;
-	int count_duble = 0;
+	int i;
+	int count_signal;
+	int count_duble;
+
+	i = 0;
+	count_signal = 0;
+	count_duble = 0;
 	while (str[i])
 	{
 		if (str[i] == '\'')
@@ -338,47 +271,38 @@ int check_for_quotes(char *str)
 		i++;
 	}
 	if (count_signal != 0 || count_duble != 0)
-		return 1;
-	return 0;
+		return (1);
+	return (0);
 }
 
 
-char *heredoc_delemter(char *orig_token) 
+char	*heredoc_delemter(char *orig_token) 
 {
 	char *new_delemter;
 
 	if (!orig_token)
 		return NULL;
 	
-	if (was_delimiter_quoted(orig_token) == 1)  // If quoted
+	if (was_delimiter_quoted(orig_token) == 1) 
 	{
-		// Simply remove the quotes
-		new_delemter = selective_remove_quotes(orig_token, 1);  // Don't free original
+		new_delemter = selective_remove_quotes(orig_token, 1);
 		return new_delemter;
 	}
-	
-	// Handle $ in unquoted delimiters
 	if (orig_token[0] == '$')
 	{
 		new_delemter = check_for_doller(orig_token);
 		if (check_for_quotes(new_delemter) == 1)
 		{
-				new_delemter = selective_remove_quotes(orig_token, 1);  // Don't free original
+				new_delemter = selective_remove_quotes(orig_token, 1);
 				return new_delemter;
 		 }
 		return new_delemter;
 	}
-	// else if (check_for_quotes(orig_token) == 1)
-	// {
-	//     new_delemter = selective_remove_quotes(orig_token, 1);  // Don't free original
-	//     return new_delemter;
-	// }
-	
 	return ft_strdup(orig_token);
 }
 
 
-void doc_expand(char *str, t_exp_helper *expand,
+void	doc_expand(char *str, t_exp_helper *expand,
 				   t_env *env, int exit_status)
 {
 	if (!expand_fill_str(expand, str))
@@ -392,7 +316,7 @@ void doc_expand(char *str, t_exp_helper *expand,
 	expand->expanded[expand->j] = '\0';
 }
 
-char *process_heredoc_epxand(char *line, t_env *env, int exit_status, char *orig_delimiter)
+char	*process_heredoc_epxand(char *line, t_env *env, int exit_status, char *orig_delimiter)
 {
 	t_exp_helper *expand;
 	char *result;
@@ -404,8 +328,6 @@ char *process_heredoc_epxand(char *line, t_env *env, int exit_status, char *orig
 	doc_expand(line, expand, env, exit_status);
 	result = expand->expanded;
 	free(expand);
-
-	// printf("ep =========> %s\n", result);
 	return result;
 }
 
@@ -413,30 +335,3 @@ void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
-
-// int *write_to_file(char *str)
-// {
-//     // if (!str)
-//     //     return NULL;
-		
-//     int i = 0;
-//     int *fd = heredoc_opener();
-//     if (fd == NULL) // Check for NULL instead of < 0
-//         return NULL; // Changed from -1
-//     if (str == NULL)
-//         ft_putchar_fd(0, fd[0]);
-//     else {
-//     while (str && str[i])
-//     {
-//         ft_putchar_fd(str[i], fd[0]);
-//         i++;
-//     }
-
-//     }
-
-//     // printf("fd[0] %d\n", fd[0]);
-
-//     // lseek(fd, 0, SEEK_SET);
-//     free(str);
-//     return fd;
-// }

@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:17:43 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/17 12:14:06 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:02:11 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ static char	*process_redir(char *str, int *pos)
 
 static int	find_redir(char *str, int i)
 {
-	int quote_state = 0;
-	
+	int	quote_state;
+
+	quote_state = 0;
 	while (str && str[i])
 	{
 		if (str[i] == '\'' && quote_state == 0)
@@ -110,4 +111,17 @@ char	*redir_extracter(char *str)
 	if (!result)
 		result = ft_substr("", 0, 0);
 	return (result);
+}
+
+t_split_helper	*split_param(size_t *i, size_t *j, size_t *start)
+{
+	t_split_helper	*split_paramter;
+
+	split_paramter = malloc(sizeof(t_split_helper));
+	if (!split_paramter)
+		return (NULL);
+	split_paramter->i = i;
+	split_paramter->j = j;
+	split_paramter->start = start;
+	return (split_paramter);
 }

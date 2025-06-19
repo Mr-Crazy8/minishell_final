@@ -1,38 +1,165 @@
-parsing/expand_utils.c: Error!
-Error: TOO_MANY_ARGS        (line:  16, col:  43):	Function has more than 4 arguments
-parsing/expand_utils_6.c: Error!
-Error: TOO_MANY_ARGS        (line:  87, col:  44):	Function has more than 4 arguments
-parsing/open_files.c: Error!
-Error: TOO_MANY_LINES       (line:  72, col:   1):	Function has more than 25 lines
-Error: TOO_MANY_LINES       (line: 146, col:   1):	Function has more than 25 lines
-parsing/parser.c: Error!
-Error: TOO_MANY_ARGS        (line:  16, col:  43):	Function has more than 4 arguments
-Error: TOO_MANY_LINES       (line:  44, col:   1):	Function has more than 25 lines
-parsing/parser_0.c: Error!
-Error: TOO_MANY_LINES       (line:  54, col:   1):	Function has more than 25 lines
-Error: TOO_MANY_ARGS        (line:  93, col:  46):	Function has more than 4 arguments
-Error: TOO_MANY_FUNCS       (line: 126, col:   1):	Too many functions in file
-parsing/parser_helper.c: Error!
-Error: TOO_MANY_ARGS        (line: 100, col:  34):	Function has more than 4 arguments
-Error: TOO_MANY_FUNCS       (line: 117, col:   1):	Too many functions in file
-Error: TOO_MANY_FUNCS       (line: 145, col:   1):	Too many functions in file
-parsing/parser_helper_2.c: Error!
-Error: SPACE_REPLACE_TAB    (line:  45, col:   8):	Found space when expecting tab
-Error: DECL_ASSIGN_LINE     (line:  45, col:  21):	Declaration and assignation on a single line
-Error: SPACE_EMPTY_LINE     (line:  46, col:   1):	Space on empty line
-parsing/parsing.h: Error!
-Error: CONSECUTIVE_NEWLINES (line: 125, col:   1):	Consecutive newlines
-Error: TOO_MANY_ARGS        (line: 142, col:  51):	Function has more than 4 arguments
-Error: TOO_MANY_ARGS        (line: 144, col:  54):	Function has more than 4 arguments
-Error: TOO_MANY_ARGS        (line: 146, col:  42):	Function has more than 4 arguments
-Error: TOO_MANY_ARGS        (line: 219, col:  45):	Function has more than 4 arguments
-Error: TOO_MANY_ARGS        (line: 233, col:  42):	Function has more than 4 arguments
-Error: TOO_MANY_ARGS        (line: 241, col:  50):	Function has more than 4 arguments
-Error: TOO_MANY_ARGS        (line: 246, col:  42):	Function has more than 4 arguments
-Error: TOO_MANY_ARGS        (line: 260, col:  43):	Function has more than 4 arguments
-Error: LINE_TOO_LONG        (line: 273, col:  84):	line too long
-parsing/parsing_main.c: Error!
-Error: TOO_MANY_ARGS        (line:  16, col:  42):	Function has more than 4 arguments
-Error: TOO_MANY_ARGS        (line:  40, col:  26):	Function has more than 4 arguments
-Error: TOO_MANY_ARGS        (line:  58, col:  26):	Function has more than 4 arguments
-
+Heredoc_Expansion.c: Error!
+Error: CONSECUTIVE_NEWLINES (line:  55, col:   1):	Consecutive newlines
+Error: SPC_BEFORE_NL        (line:  62, col:  30):	Space before newline
+Error: TOO_MANY_VARS_FUNC   (line:  63, col:   1):	Too many variables declarations in a function
+Error: TOO_MANY_VARS_FUNC   (line:  64, col:   1):	Too many variables declarations in a function
+Error: TOO_MANY_VARS_FUNC   (line:  65, col:   1):	Too many variables declarations in a function
+Error: NO_SPC_AFR_PAR       (line:  71, col:  26):	Extra space after parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line:  71, col:  28):	Missing tabs for indent level
+Error: RETURN_PARENTHESIS   (line:  72, col:  16):	Return value must be in parenthesis
+Error: NO_SPC_AFR_PAR       (line:  75, col:  20):	Extra space after parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line:  75, col:  22):	Missing tabs for indent level
+Error: RETURN_PARENTHESIS   (line:  77, col:  16):	Return value must be in parenthesis
+Error: EMPTY_LINE_FUNCTION  (line:  79, col:   1):	Empty line in function
+Error: EMPTY_LINE_FUNCTION  (line:  95, col:   1):	Empty line in function
+Error: NO_SPC_AFR_PAR       (line:  97, col:  17):	Extra space after parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line:  97, col:  19):	Missing tabs for indent level
+Error: EMPTY_LINE_FUNCTION  (line:  99, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line:  99, col:   1):	Space on empty line
+Error: SPC_BEFORE_NL        (line: 100, col:  29):	Space before newline
+Error: NO_SPC_AFR_PAR       (line: 102, col:  31):	Extra space after parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line: 102, col:  33):	Missing tabs for indent level
+Error: EMPTY_LINE_FUNCTION  (line: 109, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 109, col:   1):	Space on empty line
+Error: RETURN_PARENTHESIS   (line: 110, col:  16):	Return value must be in parenthesis
+Error: EMPTY_LINE_FUNCTION  (line: 112, col:   1):	Empty line in function
+Error: SPC_BEFORE_NL        (line: 113, col:  37):	Space before newline
+Error: EMPTY_LINE_FUNCTION  (line: 116, col:   1):	Empty line in function
+Error: SPC_BEFORE_NL        (line: 118, col:  29):	Space before newline
+Error: SPC_BEFORE_NL        (line: 120, col:  32):	Space before newline
+Error: EMPTY_LINE_FUNCTION  (line: 128, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 128, col:   1):	Space on empty line
+Error: RETURN_PARENTHESIS   (line: 129, col:  16):	Return value must be in parenthesis
+Error: SPC_BEFORE_NL        (line: 136, col:  25):	Space before newline
+Error: NO_SPC_AFR_PAR       (line: 138, col:  27):	Extra space after parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line: 138, col:  29):	Missing tabs for indent level
+Error: CONSECUTIVE_SPC      (line: 138, col:  30):	Two or more consecutives spaces
+Error: BRACE_SHOULD_EOL     (line: 138, col:  31):	Expected newline after brace
+Error: WRONG_SCOPE_COMMENT  (line: 138, col:  32):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 138, col:  32):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 138, col:  32):	Comment is invalid in this scope
+Error: EMPTY_LINE_FUNCTION  (line: 145, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 145, col:   1):	Space on empty line
+Error: RETURN_PARENTHESIS   (line: 146, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_LINES       (line: 147, col:   1):	Function has more than 25 lines
+Error: NEWLINE_PRECEDES_FUNC (line: 148, col:   1):	Functions must be separated by a newline
+Error: SPACE_EMPTY_LINE     (line: 155, col:   1):	Space on empty line
+Error: SPC_BEFORE_NL        (line: 158, col:  32):	Space before newline
+Error: RETURN_PARENTHESIS   (line: 164, col:  16):	Return value must be in parenthesis
+Error: EMPTY_LINE_FUNCTION  (line: 166, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 166, col:   1):	Space on empty line
+Error: NO_SPC_AFR_PAR       (line: 168, col:  17):	Extra space after parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line: 168, col:  19):	Missing tabs for indent level
+Error: RETURN_PARENTHESIS   (line: 172, col:  16):	Return value must be in parenthesis
+Error: SPC_BEFORE_NL        (line: 175, col:  15):	Space before newline
+Error: EMPTY_LINE_FUNCTION  (line: 176, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 176, col:   1):	Space on empty line
+Error: SPC_BEFORE_NL        (line: 177, col:  20):	Space before newline
+Error: RETURN_PARENTHESIS   (line: 182, col:  16):	Return value must be in parenthesis
+Error: EMPTY_LINE_FUNCTION  (line: 184, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 184, col:   1):	Space on empty line
+Error: TOO_MANY_VARS_FUNC   (line: 185, col:   1):	Too many variables declarations in a function
+Error: VAR_DECL_START_FUNC  (line: 185, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 185, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 185, col:  10):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 185, col:  20):	Declaration and assignation on a single line
+Error: LINE_TOO_LONG        (line: 185, col:  86):	line too long
+Error: TOO_MANY_VARS_FUNC   (line: 186, col:   1):	Too many variables declarations in a function
+Error: VAR_DECL_START_FUNC  (line: 186, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 186, col:   8):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 186, col:   9):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 186, col:  22):	Declaration and assignation on a single line
+Error: SPC_BEFORE_NL        (line: 186, col:  44):	Space before newline
+Error: SPACE_EMPTY_LINE     (line: 187, col:   1):	Space on empty line
+Error: WRONG_SCOPE_VAR      (line: 191, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 191, col:  21):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 191, col:  28):	Declaration and assignation on a single line
+Error: TOO_MANY_VARS_FUNC   (line: 196, col:   1):	Too many variables declarations in a function
+Error: VAR_DECL_START_FUNC  (line: 196, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 196, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 196, col:  10):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 196, col:  15):	Declaration and assignation on a single line
+Error: TOO_MANY_VARS_FUNC   (line: 197, col:   1):	Too many variables declarations in a function
+Error: VAR_DECL_START_FUNC  (line: 197, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 197, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 197, col:  10):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 197, col:  20):	Declaration and assignation on a single line
+Error: TOO_MANY_VARS_FUNC   (line: 198, col:   1):	Too many variables declarations in a function
+Error: VAR_DECL_START_FUNC  (line: 198, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 198, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 198, col:  10):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 198, col:  20):	Declaration and assignation on a single line
+Error: TOO_MANY_VARS_FUNC   (line: 199, col:   1):	Too many variables declarations in a function
+Error: VAR_DECL_START_FUNC  (line: 199, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 199, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 199, col:  10):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 199, col:  25):	Declaration and assignation on a single line
+Error: RETURN_PARENTHESIS   (line: 205, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_LINES       (line: 206, col:   1):	Function has more than 25 lines
+Error: NEWLINE_PRECEDES_FUNC (line: 207, col:   1):	Functions must be separated by a newline
+Error: SPACE_EMPTY_LINE     (line: 211, col:   1):	Space on empty line
+Error: SPC_BEFORE_NL        (line: 214, col:  21):	Space before newline
+Error: SPC_BEFORE_NL        (line: 216, col:  21):	Space before newline
+Error: CONSECUTIVE_SPC      (line: 221, col:  27):	Two or more consecutives spaces
+Error: SPC_BEFORE_NL        (line: 221, col:  27):	Space before newline
+Error: RETURN_PARENTHESIS   (line: 223, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 226, col:   1):	Too many functions in file
+Error: SPC_BEFORE_NL        (line: 228, col:  22):	Space before newline
+Error: EOL_OPERATOR         (line: 229, col:  78):	Logic operator at the end of line
+Error: MIXED_SPACE_TAB      (line: 230, col:   5):	Mixed spaces and tabs
+Error: TOO_FEW_TAB          (line: 230, col:   9):	Missing tabs for indent level
+Error: RETURN_PARENTHESIS   (line: 231, col:  16):	Return value must be in parenthesis
+Error: RETURN_PARENTHESIS   (line: 232, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 235, col:   1):	Too many functions in file
+Error: SPACE_REPLACE_TAB    (line: 237, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 238, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 239, col:   8):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 239, col:   9):	Misaligned variable declaration
+Error: SPACE_EMPTY_LINE     (line: 240, col:   1):	Space on empty line
+Error: LINE_TOO_LONG        (line: 244, col:  87):	line too long
+Error: TOO_FEW_TAB          (line: 247, col:   1):	Missing tabs for indent level
+Error: MIXED_SPACE_TAB      (line: 247, col:   5):	Mixed spaces and tabs
+Error: CONSECUTIVE_SPC      (line: 247, col:   9):	Two or more consecutives spaces
+Error: SPC_BEFORE_NL        (line: 248, col:  13):	Space before newline
+Error: EMPTY_LINE_FUNCTION  (line: 250, col:   1):	Empty line in function
+Error: TOO_MANY_FUNCS       (line: 260, col:   1):	Too many functions in file
+Error: SPACE_REPLACE_TAB    (line: 262, col:   8):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 263, col:   8):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 264, col:   8):	Found space when expecting tab
+Error: CONSECUTIVE_NEWLINES (line: 282, col:   1):	Consecutive newlines
+Error: TOO_MANY_FUNCS       (line: 283, col:   1):	Too many functions in file
+Error: SPC_BEFORE_NL        (line: 283, col:  44):	Space before newline
+Error: SPC_BEFORE_NL        (line: 283, col:  45):	Space before newline
+Error: SPACE_REPLACE_TAB    (line: 285, col:   9):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 288, col:  16):	Return value must be in parenthesis
+Error: EMPTY_LINE_FUNCTION  (line: 289, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 289, col:   1):	Space on empty line
+Error: SPC_BEFORE_NL        (line: 290, col:  47):	Space before newline
+Error: RETURN_PARENTHESIS   (line: 293, col:  16):	Return value must be in parenthesis
+Error: TOO_MANY_TAB         (line: 300, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line: 301, col:   1):	Extra tabs for indent level
+Error: RETURN_PARENTHESIS   (line: 301, col:  24):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line: 302, col:   1):	Missing tabs for indent level
+Error: MIXED_SPACE_TAB      (line: 302, col:   5):	Mixed spaces and tabs
+Error: RETURN_PARENTHESIS   (line: 303, col:  16):	Return value must be in parenthesis
+Error: RETURN_PARENTHESIS   (line: 305, col:  12):	Return value must be in parenthesis
+Error: CONSECUTIVE_NEWLINES (line: 308, col:   1):	Consecutive newlines
+Error: TOO_MANY_FUNCS       (line: 309, col:   1):	Too many functions in file
+Error: MIXED_SPACE_TAB      (line: 310, col:  13):	Mixed spaces and tabs
+Error: CONSECUTIVE_SPC      (line: 310, col:  17):	Two or more consecutives spaces
+Error: SPACE_AFTER_KW       (line: 313, col:   9):	Missing space after keyword
+Error: EMPTY_LINE_FUNCTION  (line: 314, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 314, col:   1):	Space on empty line
+Error: NO_SPC_AFR_PAR       (line: 315, col:  39):	Extra space after parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line: 315, col:  41):	Missing tabs for indent level
+Error: TOO_MANY_FUNCS       (line: 323, col:   1):	Too many functions in file
+Error: LINE_TOO_LONG        (line: 323, col:  94):	line too long
+Error: SPACE_REPLACE_TAB    (line: 325, col:  17):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 326, col:   9):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 326, col:  10):	Misaligned variable declaration
+Error: NL_AFTER_VAR_DECL    (line: 327, col:   1):	Variable declarations must be followed by a newline
+Error: LINE_TOO_LONG        (line: 327, col:  82):	line too long
+Error: RETURN_PARENTHESIS   (line: 328, col:  16):	Return value must be in parenthesis
+Error: RETURN_PARENTHESIS   (line: 331, col:  16):	Return value must be in parenthesis
+Error: RETURN_PARENTHESIS   (line: 335, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_FUNCS       (line: 338, col:   1):	Too many functions in file

@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 10:29:47 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/15 17:02:38 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/19 11:47:16 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,42 @@ void	print_ambiguous_redir_errors(t_cmd *cmd)
 			redir = redir->next;
 		}
 		tmp = tmp->next;
+	}
+}
+
+void	*ft_memcpy_q(void *dest, const void *src, size_t n)
+{
+	unsigned char		*d;
+	const unsigned char	*s;
+	size_t				i;
+
+	if (dest == src)
+		return (dest);
+	d = (unsigned char *)dest;
+	s = (const unsigned char *)src;
+	i = 0;
+	while (i < n)
+	{
+		d[i] = s[i];
+		i++;
+	}
+	return (dest);
+}
+
+void	count_words_q_hp(char s, int *quote_state)
+{
+	if (s == '\'')
+	{
+		if (*quote_state == 0)
+			*quote_state = 1;
+		else if (*quote_state == 1)
+			*quote_state = 0;
+	}
+	else if (s == '\"')
+	{
+		if (*quote_state == 0)
+			*quote_state = 2;
+		else if (*quote_state == 2)
+			*quote_state = 0;
 	}
 }

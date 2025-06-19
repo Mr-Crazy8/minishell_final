@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:46:36 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/18 14:33:00 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/19 12:03:39 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,45 @@
 # define SET 0
 # define GET 1
 
-typedef struct s_add_int_pointer
+typedef struct s_split_helper
 {
-	int	*quote_state;
-	int	*j;
-}	t__add_int_pointer;
+	size_t	*i;
+	size_t	*j;
+	size_t	*start;
+}	t_split_helper;
+
+typedef struct s_extra_param
+{
+	char	*result;
+	int		*i;
+	int		*result_len;
+	int		*quote_state;
+	int		had_quotes;
+}	t_extra_param;
+
+typedef struct s_pre_cmd
+{
+	char	*input;
+	char	*result;
+	int		*i;
+	int		*j;
+}	t_pre_cmd;
+
+typedef struct s_quote_params
+{
+	int		quote_state;
+	char	*new_str;
+	int		j;
+	int		remove_mode;
+	int		in_opposite_quote;
+	int		i;
+}	t_quote_params;
 
 typedef struct s_add_int
 {
 	int		number_1;
 	int		number_2;
 }	t_add_int;
-
-typedef struct s_add_char
-{
-	char		*str;
-	char		*new_str;
-}	t_add_char;
 
 typedef struct t_data
 {
@@ -122,7 +144,10 @@ typedef struct s_exp_helper
 	int		had_removed_var;
 }	t_exp_helper;
 
-
+void			cmd_extra_helper(char *str,
+					t_extra_param	*extra_param, char *quote);
+void			processed_cmd(t_cmd *current, char	*processed);
+void			process_input_characters(t_pre_cmd *pre_cmd, int *in_quotes);
 void			shift_arrays_left(t_cmd *current, int *i, int *j);
 void			process_redir_helper(char str, int *quote_state);
 void			scan_for_token(char *input, int *i,
@@ -138,12 +163,9 @@ void			cmd_extracter_hp_0(char str, int *quote_state);
 void			check_missing_filename(char *str);
 void			print_error(char *str, int *i);
 void			redirection_helper(char *str, int *i, int *count);
-void			cmd_extracter_hp_1(char *str, int *quote_state, int *i,
-					int *result_len, char *result);
-void			cmd_extracter_hp_2(char *str, int *i, char *result,
-					int *result_len, int quote_state);
-void			preprocess_cmd_hp_1(char *input, int *i, int *in_quotes,
-					char *result, int *j);
+void			cmd_extracter_hp_1(char *str, t_extra_param	*extra_param);
+void			cmd_extracter_hp_2(char *str, t_extra_param	*extra_param);
+void			preprocess_cmd_hp_1(t_pre_cmd *pre_cmd, int *in_quotes);
 void			value_extracter(t_exp_helper *expand, t_env *env);
 void			free_env_struct(t_env *env_struct);
 void			free_token_list(t_token *token_list);
@@ -201,7 +223,7 @@ char			*ft_strtrim(char const *s1, char const *set);
 char			*change_space(char *str);
 char			**free_split_q(char **split, size_t j);
 char			**free_split(char **split, size_t j);
-char			*allocate_and_init(char *str, int *i, int *j, int *quote_state);
+char			*allocate_and_init(char *str);
 char			*selective_remove_quotes(char *str, int remove_mode);
 char			*lookup_variable(char *var_name, t_env *env_struct);
 
@@ -215,8 +237,7 @@ int				here_doc_static(int type, int status);
 int				has_quotes_in_previous_args(t_cmd *current, int current_index);
 int				ft_lint(char **str);
 int				helper3(t_exp_helper *expand, int exit_status, int pipe_out);
-int				process_quote_char(char c, int *quote_state, char *new_str,
-					int *j, int remove_mode);
+int				process_quote_char(char c, t_quote_params	*qoute_param);
 int				expand_handle_helper0(t_exp_helper *expand);
 int				ensure_buffer_space(t_exp_helper *expand,
 					size_t additional_needed);
@@ -229,21 +250,19 @@ int				extracting_the_key_value(t_exp_helper *expand, int exit_status,
 					t_env *env, int pipe_out);
 int				var_name_extract(t_exp_helper *expand);
 int				alloc_var_name(t_exp_helper *expand);
-int				preprocess_cmd_hp_0(char *input, int *i, int *in_quotes,
-					char *result, int *j);
+int				preprocess_cmd_hp_0(t_pre_cmd *pre_cmd, int *in_quotes);
 int				is_whitespace(char c);
 int				special_character_cheker(char character);
 int				handle_quotes(char c, int *quote_state);
 int				special_character_cheker_with_quotes(char character,
 					int quote_state);
 int				ft_isalnum(int c);
-int				split_string_q_hp1(char **split, size_t *i, size_t *j,
-					size_t *start, char const *s);
+int				split_string_q_hp1(char **split,
+					t_split_helper	*split_paramter, char const *s);
 int				creat_redir_list_helper(char *str);
 int				is_valid_var_char(char c);
 int				*open_file(t_cmd *cmd, int type, char *file, int Ambiguous);
-int				preprocess_cmd_hp_2(char *input, int *i, int *in_quotes,
-					char *result, int *j);
+int				preprocess_cmd_hp_2(t_pre_cmd *pre_cmd, int *in_quotes);
 int				adding_var_value(t_exp_helper *expand);
 int				check_for_redirection(char *str);
 int				*heredoc_opener(void);
@@ -256,8 +275,9 @@ int				error_pipi(t_token *token_list);
 int				check_syntax_errors(t_token *token_list);
 int				get_or_set(int type, int status);
 int				is_valid_key(char *key);
-int	rebuild_cmd_args(char **new_args, t_cmd *current, char **split,
+int				rebuild_cmd_args(char **new_args, t_cmd *current, char **split,
 					t_add_int	*two_numbers);
+int				skip_redirections(char *str);
 t_token			*creat_token(char *data, char *token_type);
 t_token			*special_character_handle(char *input, int *i);
 t_token			*tokin_list_maker(char *input);
@@ -270,6 +290,13 @@ t_exp_helper	*alloc_expand(void);
 t_add_int		*add_two_int(int exit_status, int pipe_out);
 void			ft_putchar_fd(char c, int fd);
 char			*split_helper(char *str, char *befor, int exp);
-void			process_redir_hp(char *str, int *start, int *i, int *after_operator);
+void			process_redir_hp(char *str, int *start,
+					int *i, int *after_operator);
 void			processed_redir(t_redir *redir, char *processed);
+t_pre_cmd		*init_precmd(char *input, int *i, char *result, int *j);
+t_add_int		*add_two_int(int number_1, int number_2);
+t_quote_params	*add_quote_params(char *new_str, int remove_mode);
+t_split_helper	*split_param(size_t *i, size_t *j, size_t *start);
+t_extra_param	*init_extra_param(char *result,
+					int *i, int *result_len, int *quote_state);
 #endif

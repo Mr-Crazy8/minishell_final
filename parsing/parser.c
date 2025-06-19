@@ -6,40 +6,30 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:47:25 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/18 14:16:13 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/19 11:36:03 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-void	cmd_extracter_hp_1(char *str, int *quote_state, int *i,
-			int *result_len, char *result)
+void	cmd_extracter_hp_1(char *str, t_extra_param	*extra_param)
 {
 	char	quote;
 
-	if (*quote_state == 0 && (str[(*i)] == '>' || str[(*i)] == '<'))
+	if (*extra_param->quote_state == 0
+		&& (str[(*extra_param->i)] == '>' || str[(*extra_param->i)] == '<'))
 	{
-		if (*result_len > 0 && result[(*result_len) - 1] != ' ')
-			result[(*result_len)++] = ' ';
-		(*i)++;
-		if (str[(*i)] == '>' || str[(*i)] == '<')
-			(*i)++;
-		while (str[(*i)] && str[(*i)] == ' ')
-			(*i)++;
-		while (str[(*i)] && str[(*i)] != ' '
-			&& str[(*i)] != '>' && str[(*i)] != '<')
-		{
-			if (str[(*i)] == '\'' || str[(*i)] == '\"')
-			{
-				quote = str[(*i)++];
-				while (str[(*i)] && str[(*i)] != quote)
-					(*i)++;
-				if (str[(*i)])
-					(*i)++;
-			}
-			else
-				(*i)++;
-		}
+		if (*extra_param->result_len > 0
+			&& extra_param->result[(*extra_param->result_len) - 1] != ' ')
+			extra_param->result[(*extra_param->result_len)++] = ' ';
+		(*extra_param->i)++;
+		if (str[(*extra_param->i)] == '>' || str[(*extra_param->i)] == '<')
+			(*extra_param->i)++;
+		while (str[(*extra_param->i)] && str[(*extra_param->i)] == ' ')
+			(*extra_param->i)++;
+		while (str[(*extra_param->i)] && str[(*extra_param->i)] != ' '
+			&& str[(*extra_param->i)] != '>' && str[(*extra_param->i)] != '<')
+			cmd_extra_helper(str, extra_param, &quote);
 	}
 }
 
@@ -70,31 +60,6 @@ char	*cmd_extracter_hp_3(char *result, int *result_len, int had_quotes)
 	free(result);
 	return (final);
 }
-
-// char	*cmd_extracter(char *str)
-// {
-// 	char	*result;
-// 	int		i;
-// 	int		result_len;
-// 	int		quote_state;
-// 	int		had_quotes;
-
-// 	had_quotes = 0;
-// 	result = init_cmd_buffer(str, &i, &result_len, &quote_state);
-// 	if (!result)
-// 		return (NULL);
-// 	while (str[i])
-// 	{
-// 		cmd_extracter_hp_0(str[i], &quote_state);
-// 		if (quote_state != 0)
-// 			had_quotes = 1;
-// 		if (quote_state == 0 && (str[i] == '>' || str[i] == '<'))
-// 			cmd_extracter_hp_1(str, &quote_state, &i, &result_len, result);
-// 		else
-// 			cmd_extracter_hp_2(str, &i, result, &result_len, quote_state);
-// 	}
-// 	return (cmd_extracter_hp_3(result, &result_len, had_quotes));
-// }
 
 t_redir	*creat_redir_node(int type, char *file)
 {

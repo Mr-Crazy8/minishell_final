@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 11:34:42 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/15 11:37:37 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/19 11:30:46 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,32 @@ int	expand_fill_str(t_exp_helper *expand, char *str)
 	expand->var_name = NULL;
 	expand->var_value = NULL;
 	return (1);
+}
+
+void	process_quotes_for_cmd_hp(t_cmd *current, int *i, int remove_mode)
+{
+	char	*processed;
+
+	if (current->args)
+	{
+		*i = 0;
+		while (current->args[*i])
+		{
+			processed = selective_remove_quotes(
+					current->args[*i], remove_mode);
+			if (processed)
+			{
+				free(current->args[*i]);
+				current->args[*i] = processed;
+			}
+			(*i)++;
+		}
+	}
+	if (current->cmd)
+	{
+		*i = 0;
+		processed = selective_remove_quotes(current->cmd, remove_mode);
+		if (processed)
+			processed_cmd(current, processed);
+	}
 }
