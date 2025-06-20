@@ -1,0 +1,88 @@
+3. `echo -n hello`
+4. `echo -n -n -n hello`
+5. `echo "hello    world"`
+6. `cd` (to home directory)
+7. `cd -` (to previous directory)
+8. `cd .`
+9. `cd ..`
+10. `cd` to non-existent directory
+11. `pwd` in regular directory
+12. `pwd` after cd to symlink
+13. `pwd` with arguments (should error)
+14. `export VAR=value`
+15. `export VAR=`
+16. `export VAR`
+17. `export 1INVALID=test`
+18. `export VAR=value VAR2=value2`
+19. `unset EXISTING_VAR`
+20. `unset NON_EXISTING_VAR`
+1. Echo existing environment variable (`echo $PATH`)
+2. Echo non-existing variable (`echo $NONEXISTENT`)
+3. Echo variable with special characters
+4. Use variable in command argument (`ls $HOME`)
+5. Multiple variables in one command (`echo $USER $HOME`)
+6. Variable with empty value
+7. Variable within double quotes (`echo "$HOME"`)
+8. Variable within single quotes (`echo '$HOME'`)
+9. Variable with special characters in name
+10. Variable with adjacent text (`echo $USER123`)
+11. Multiple sequential variables (`echo $VAR1$VAR2`)
+12. Variable with spaces in value
+13. Export and use new variable
+14. Unset and try to use variable
+15. Use $? special variable after commands
+1. Simple single quotes (`'hello'`)
+2. Simple double quotes (`"hello"`)
+3. Nested quotes (`"'hello'"`, `'"hello"'`)
+4. Empty quotes (`''`, `""`)
+5. Quotes with spaces (`"hello   world"`)
+6. Quotes with special characters
+7. Unclosed quotes (error handling)
+8. Mixed quotes (`'hello'"world"`)
+9. Quotes with variables (`"$HOME"`, `'$HOME'`)
+10. Quotes in command arguments
+11. Escaped quotes (`\"`, `\'`)
+12. Quotes with pipe characters
+13. Quotes with redirection operators
+14. Quotes with semicolons
+15. Quotes with environment variables and spaces
+1. Ctrl+C during command execution
+2. Ctrl+C at empty prompt
+3. Ctrl+D at empty prompt
+4. Ctrl+D with text at prompt
+5. Ctrl+\ during command execution
+6. Ctrl+\ at empty prompt
+7. Multiple Ctrl+C in sequence
+8. Signal handling in child processes
+9. Signal handling during sleep command
+10. Signal handling during cat command
+1. Check `$?` after successful command
+2. Check `$?` after failed command
+3. Check `$?` after signal interruption
+4. Check `$?` after builtin commands
+5. Check `$?` after syntax errors
+6. Check `$?` after permission denied
+7. Check `$?` after command not found
+8. Check `$?` multiple commands in sequence
+9. Check `$?` after empty input
+10. Check exit status inheritance in subshells
+1. Command not found
+2. Permission denied
+3. No such file or directory
+4. Invalid syntax
+5. Directory not executable
+6. Too many arguments
+7. Invalid option
+8. File name too long
+9. Invalid file descriptor
+10. Memory allocation failure handling
+11. Path too long
+12. Invalid environment variable name
+13. Invalid argument format
+14. Execution permission denied
+15. Non-existent home directory for cd
+1. Each test should be run independently
+2. Compare output with bash behavior
+3. Check return values using echo $?
+4. Monitor memory leaks using valgrind
+5. Test both interactive and non-interactive modes

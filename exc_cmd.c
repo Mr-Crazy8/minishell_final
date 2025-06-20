@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exc_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoakouh <ayoakouh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 16:33:44 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/15 14:49:51 by ayoakouh         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:37:38 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,4 +277,6 @@ void	ft_excute_commands(t_cmd *cmd, t_env **env_list)
 	{
 		wait_for_children(cmd, child_pid);
 	}
+	free_split_str(env_doble);
+	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoakouh <ayoakouh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:09:10 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/10 15:09:18 by ayoakouh         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:28:47 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void    set_env(t_env **env, char *key, char *value)
 {
 	t_env *tmp;
 	t_env *new_node = NULL;
-
+	char	*tp;
 	tmp = *env;
 	while(tmp)
 	{
@@ -115,8 +115,9 @@ void    set_env(t_env **env, char *key, char *value)
 		{
 			if (tmp->value)
 			{
+				tp = tmp->value;
 				tmp->value = ft_strjoin(tmp->value, value);
-				// tmp->is_not_active = 0;
+				free(tp);
 				return ;
 			}
 		}
@@ -190,6 +191,8 @@ int ft_handel_export(char **str, t_env **lst)
 		{
 		   if (ft_check(*lst, key) == 1)
 		   {
+				free(key); /// this should be add
+				free(value); /// this should be add
 				i++;
 				continue;
 		   }

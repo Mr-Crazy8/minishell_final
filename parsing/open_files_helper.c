@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 11:32:18 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/19 11:34:38 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:19:11 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,7 @@ int	*open_file(t_cmd *cmd, int type, char *file, int Ambiguous)
 {
 	int	*fd;
 
-	if (type == 3)
-		return (heredoc_opener());
-	if (Ambiguous == 1)
+	if (Ambiguous == 1 && type != 3)
 	{
 		fd = malloc(2 * sizeof(int));
 		if (!fd)

@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:47:25 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/19 11:36:03 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/20 12:30:58 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_cmd	*creat_cmd_node(char *str, t_token *tp, int pipe_out)
 	tmp->redirs = creat_redir_list(str);
 	tmp->pipe_out = pipe_out;
 	tmp->data.exit_status = 0;
+	tmp->flag = 0;
 	tmp->next = NULL;
 	return (tmp);
 }

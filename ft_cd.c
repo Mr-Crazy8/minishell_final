@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoakouh <ayoakouh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 14:05:15 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/10 14:54:10 by ayoakouh         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:27:48 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int	ft_cd(char **str, t_env **list, t_cmd *cmd)
 	}
 	if (cwd)
 		cmd->data.new_pwd = get_set(cwd, 0);
+	free(cwd);  /// this should be add
 	set_value_env(list, "PWD", cmd->data.new_pwd);
 	return (0);
 }

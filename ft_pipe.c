@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoakouh <ayoakouh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 16:16:16 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/15 17:39:50 by ayoakouh         ###   ########.fr       */
+/*   Updated: 2025/06/20 15:53:20 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ void check_close_red(t_cmd *cmd, t_cmd *prev, t_env *env)
 	if (cmd->redirs && !isatty(cmd->redirs->fd[1]))
 		ft_redircte(cmd->redirs, env, cmd);
 }
+
 void close_redirection(t_redir *redirs)
 {
     t_redir *tmp = redirs;

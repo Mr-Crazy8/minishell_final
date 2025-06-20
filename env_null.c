@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_null.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ayoakouh <ayoakouh@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 15:58:55 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/10 18:43:41 by ayoakouh         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:11:56 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ t_env	*env_null(void)
 	tmp = creat_new_env(
 			ft_strdup("PATH"),
 			ft_strdup("/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."));
+	if (tmp == NULL)
+		{
+			return NULL;
+		}
 	tmp->for_path = 1;
 	ft_lstadd_back(&list, tmp);
 	ft_lstadd_back(&list, creat_new_env(ft_strdup("OLDPWD"), NULL));

@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 15:08:46 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/19 11:33:59 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/20 17:09:31 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	file_opener(t_cmd *cmd, t_env *env)
 	int		failed;
 
 	tmp = cmd;
+	check_here_doc(cmd, env);
 	while (tmp)
 	{
 		tp = tmp->redirs;

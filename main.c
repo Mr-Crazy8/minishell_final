@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:35:13 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/17 15:10:11 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:55:29 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -476,7 +476,7 @@ void check_line(t_cmd **command, t_env **env_list, char *env[])
 	(*command)->fd[1] = dup(1);
     if ((*command)->redirs != NULL)
     {
-        check_here_doc(*command, *env_list);
+        // check_here_doc(*command, *env_list);
         if ((*command)->flag == 1)
         {
 			cleanup_all_heredocs(cmd);
@@ -659,12 +659,15 @@ int main(int argc, char *argv[], char *env[])
 			continue;
 		}
 		preprocessed_input = preprocess_command(input); 
-		free(input);
 		if (!preprocessed_input)
 		{
-			free(input);
+			if (input != NULL)
+			{
+				free(input);
+			}
 			continue;
 		}
+		free(input);
 		char *new_input = change_space(preprocessed_input); 
 		token_list = tokin_list_maker(new_input);
 		free(preprocessed_input);
@@ -682,7 +685,7 @@ int main(int argc, char *argv[], char *env[])
 			print_ambiguous_redir_errors(cmd);
 			print_cmd(cmd);
 			check_line(&cmd, &env_struct, env);
-			// free_cmd_list(cmd);
+			free_cmd_list(cmd);
 			global_sig = 0;
 		}
 		else if (error_pipi(token_list)  || check_syntax_errors(token_list))/// must stay
