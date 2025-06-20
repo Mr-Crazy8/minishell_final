@@ -264,5 +264,10 @@ void close_heredoc_fds(t_redir *redir);
 void    kill_and_wait_all(t_cmd *cmd);
 void close_all_pipes(t_cmd *cmd);
 void ft(char **args, t_env **list);
-
+void	free_dir(int j, int dir_size, char **dir);
+int	was_delimiter_quoted(char *orig_token);
+int	check_for_quotes(char *str);
+char	*check_for_doller(char *orig_token);
+char	*random_file_name(void);
+char	*random_dir(void);
 #endif

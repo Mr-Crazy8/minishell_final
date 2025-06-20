@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:08:09 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/18 17:47:24 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/19 17:05:26 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	process_string(char *str, t_exp_helper *expand, t_env *env,
 		free(two_number);
 		return ;
 	}
-	free(two_number);
 	if (expand->expanded)
 		expand->expanded[expand->j] = '\0';
 	new_expanded = ft_strtrim(change_space((expand->expanded)), " ");

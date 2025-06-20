@@ -20,7 +20,8 @@ SRCS = exc_cmd.c  libft_utils.c echo.c \
 		parsing/expand.c                parsing/expand_utils_5.c        parsing/free_func_1.c        \
 		parsing/open_files.c            parsing/parser_helper_3.c       parsing/syntx_check_helper_0.c\
 		parsing/expand_helper_0.c       parsing/expand_utils_6.c        parsing/ft_itoa.c              \
-		parsing/open_files_helper.c     parsing/parser_helper_4.c       parsing/syntx_check_helper_1.c
+		parsing/open_files_helper.c     parsing/parser_helper_4.c       parsing/syntx_check_helper_1.c \
+		heredoc_helper_0.c  heredoc_helper_1.c  heredoc_helper_2.c heredoc_helper_3.c 
 		
 # Object files
 OBJS = $(SRCS:.c=.o)
