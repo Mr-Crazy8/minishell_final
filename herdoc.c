@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:30:57 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/20 18:14:40 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/20 21:36:55 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ void check_here_doc(t_cmd *cmd, t_env *env)
 			if (tmp_redir->type == 3)
 			{
 				tmp_redir->fd = heredoc_opener();
-				printf("tmp_redir->fd[0] === [%d]\n", tmp_redir->fd[0]);
-				printf("tmp_redir->fd[1] === [%d]\n", tmp_redir->fd[1]);
 				pid = fork();
 				if (pid == 0)
 				{

@@ -11,6 +11,19 @@
 #include <termios.h>
 #include "parsing/parsing.h"
 
+
+typedef struct s_shell_var
+{
+    t_env *env_struct;
+    struct termios infos;
+    int exit_status;
+    char **env;
+} t_shell_var;
+
+
+void execute_single_command(t_cmd *cmd, t_env **list_env, char *env[]);
+void excute_builting(t_cmd **command, t_env **env_list, char *env[]);
+int is_builtin(char **args);
 // #define SET 0
 // #define GET 1
 
@@ -255,7 +268,7 @@ void    check_directory(t_cmd *cmd);
 void desable_echo_term();
 char *get_set(char *type, int flag);
 void handle_child(t_cmd *cmd, t_env *env_list, char *env[], pid_t child_pid);
-void check_here_doc(t_cmd *cmd, t_env *env);
+
 void heredoc(char *delmeter, t_env *env, int exit_status, char *orig_delimiter, int fd);
 char *process_heredoc_epxand(char *line, t_env *env, int exit_status, char *orig_delimiter);
 void restory_window(t_cmd *cmd);

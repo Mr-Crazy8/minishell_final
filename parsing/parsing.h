@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:46:36 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/19 12:03:39 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/20 21:24:44 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ typedef struct s_exp_helper
 	int		had_removed_var;
 }	t_exp_helper;
 
+char *change_space(char *str);
 void			cmd_extra_helper(char *str,
 					t_extra_param	*extra_param, char *quote);
 void			processed_cmd(t_cmd *current, char	*processed);

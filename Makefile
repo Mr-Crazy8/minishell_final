@@ -7,7 +7,7 @@ NAME = minishell
 
 # Source files
 SRCS = exc_cmd.c  libft_utils.c echo.c \
-		ft_unset.c ft_exit.c env.c export.c ft_cd.c pwd.c \
+		ft_unset.c ft_exit.c env.c export.c execut_helper.c ft_cd.c pwd.c \
 		env_null.c redrction.c   herdoc.c    ft_pipe.c   main.c  Heredoc_Expansion.c\
 		parsing/Ambiguous.c             parsing/expand_helper_1.c       parsing/expand_utils_7.c     \
 		parsing/ft_split.c              parsing/parser.c                parsing/parsing_main.c       \

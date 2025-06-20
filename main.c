@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:35:13 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/20 16:55:29 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/20 21:37:23 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,33 +87,7 @@ void change_back_cmd(t_cmd *cmd)
         tmp = tmp->next;
     }
 }
-char *change_space(char *str)
-{
-    int i = 0;
-    int quote_state = 0;
-    
-    while(str && str[i])
-    {
-        if (str[i] == '\'')
-        {
-            if (quote_state == 0)
-                quote_state = 1;
-            else if (quote_state == 1)
-                quote_state = 0;
-        }
-        else if (str[i] == '"')
-        {
-            if (quote_state == 0)
-                quote_state = 2;
-            else if (quote_state == 2)
-                quote_state = 0;
-        }
-        if (str[i] >= 9 && str[i] <=13 && quote_state == 0)
-            str[i] = ' ';
-        i++;
-    }
-    return str;
-}
+
 void free_extract_result(char **split)
 {
     if (!split)
@@ -335,69 +309,10 @@ void add_one_shlvl(t_env *env)
 }
 
 int global_sig = 0;
-int is_builtin(char **args)
-{
-	if(!args || !*args)
-		return (1);
-	if (strcmp(args[0], "cd") == 0)
-		return (0);
-	else if (strcmp(args[0], "echo") == 0)
-		return (0);
-	else if (strcmp(args[0], "unset") == 0)
-		return (0);
-	else if (strcmp(args[0], "export") == 0)
-		return (0);
-	else if (strcmp(args[0], "pwd") == 0)
-		return (0);
-	else if (strcmp(args[0], "env") == 0)
-		return (0);
-	else if (strcmp(args[0], "exit") == 0)
-		return (0);
-	else
-		return (1);
-}
 
-void excute_builting(t_cmd **command, t_env **env_list, char *env[])
-{
-	t_cmd	*cmd;
-	int		status;
 
-	cmd = *command;
-	status = 0;
 
-	if (strncmp("export", cmd->args[0], 6) == 0 && strlen(cmd->args[0]) == 6)
-	{
-		status = ft_export(cmd->args, env_list);
-	}
-	else if (strncmp("env", cmd->args[0], 3) == 0 && strlen(cmd->args[0]) == 3)
-	{
-		status = ft_env(*command, *env_list);
-	}
-	else if (strncmp("exit", cmd->args[0], 4) == 0 && strlen(cmd->args[0]) == 4)
-	{
-		status = ft_exit(cmd->args, cmd->data);
-	}
-	else if (strncmp("unset", cmd->args[0], 5) == 0 && strlen(cmd->args[0]) == 5)
-	{
-		status = ft_unset(env_list, cmd->args + 1);
-	}
-	else if (strncmp("echo", cmd->args[0], 4) == 0 && strlen(cmd->args[0]) == 4)
-		status = echo(cmd->args);
-	else if (strncmp("pwd", cmd->args[0], 3) == 0 && strlen(cmd->args[0]) == 3)
-	{
-		status = pwd(cmd);
-	}
-	else if (strncmp("cd", cmd->args[0], 2) == 0 && strlen(cmd->args[0]) == 2)
-		status = ft_cd(cmd->args, env_list, cmd);
-	// puts("kkkkk");
-	// t_env *tmp = env_list;
-	// while(tmp)
-	// {
-	//     printf("%s,,, %s\n", tmp->key, tmp->value);
-	//     tmp = tmp ->next;
-	// }
-	cmd->data.exit_status = get_or_set(SET, status);
-}
+
 void restory_window(t_cmd *cmd)
 {
 	dup2(cmd->fd[0], 0);
@@ -405,22 +320,9 @@ void restory_window(t_cmd *cmd)
 	close(cmd->fd[0]);
 	close(cmd->fd[1]);
 }
-void execute_single_command(t_cmd *cmd, t_env **list_env, char *env[])
-{
-		if(!is_builtin(cmd->args))
-		{
-			excute_builting(&cmd, list_env, env);
-			get_or_set(SET, cmd->data.exit_status);
-		}
-		else
-		{
-			if(cmd->pipe_out)
-				ft(cmd->args, list_env);
-			else
-				ft_excute_commands(cmd, list_env);
-			get_or_set(SET, cmd->data.exit_status);	
-		}
-}
+
+
+
 void handel_signal(int sig)
 {
 	if (sig == SIGINT)
@@ -448,6 +350,7 @@ void excute_redrction(t_cmd **cmd, t_env *env_list)
 			ft_redircte((*cmd)->redirs, env_list, *cmd);
 		}
 }
+
 void cleanup_all_heredocs(t_cmd *cmd)
 {
 	t_cmd *tmp = cmd;
@@ -467,6 +370,7 @@ void cleanup_all_heredocs(t_cmd *cmd)
 		tmp = tmp->next;
 	}
 }
+
 void check_line(t_cmd **command, t_env **env_list, char *env[])
 {
 	t_cmd	*cmd;
@@ -476,7 +380,6 @@ void check_line(t_cmd **command, t_env **env_list, char *env[])
 	(*command)->fd[1] = dup(1);
     if ((*command)->redirs != NULL)
     {
-        // check_here_doc(*command, *env_list);
         if ((*command)->flag == 1)
         {
 			cleanup_all_heredocs(cmd);
@@ -541,163 +444,197 @@ void hb(int sig)
 	rl_redisplay();
 }
 
-// void check_here_doc(t_cmd *cmd, t_env *env)
-// {
-// 	t_cmd *tmp;
-// 	t_redir *tmp_redir;
 
-// 	tmp_redir = NULL;
-// 	tmp = cmd;
-// 	int *fd;
-// 	cmd->flag = 1;
-// 	while (tmp)
-// 	{
-// 		tmp_redir = tmp->redirs;
-// 		while (tmp_redir)
-// 		{
-// 			pid_t pid;
-// 			pid = fork();
-// 			if(pid == 0){
-// 			if (tmp_redir->type == 3)
-// 				{
-// 					signal(SIGINT, hb);
-// 					fd = heredoc(tmp_redir->file, env, 0, tmp_redir->orig_token);
-// 					// printf("%d\n", fd[1]);
-// 					if (fd != NULL)
-//                 	{
-//                     	tmp_redir->fd = fd[1];
-//                     	close(fd[0]);
-//                 	}
-//                 	else
-//                 	{
-//                     	tmp_redir->fd = -1;
-//                 	}
-// 				}
-// 			}
-// 			if(pid > 0)
-// 				wait_parent_children(cmd, pid);
-// 			else 
-// 				perror("fork");
-// 			tmp_redir = tmp_redir->next;
-// 		}
-		
-// 		tmp = tmp->next;
-// 	}
-// }
 void check_sig(t_cmd *cmd)
 {
 	if(global_sig != 0)
 	{
 		if (global_sig == 2)
-		{
 			global_sig = 1;
-		}
 		else
-		{
 			global_sig = 0;
-		}
 		cmd->data.exit_status = get_or_set(SET, global_sig);
 	}
 }
 
+int shell_mode(void)
+{
+	if(!isatty(1) || !isatty(0))
+		exit(1);
+}
+
+t_shell_var *init_shell(char **env)
+{
+    t_shell_var *var;
+    
+    var = malloc(sizeof(t_shell_var));
+    if (!var)
+        return NULL;
+	var->env_struct = NULL;
+    var->env_struct = env_maker(env, &var->env_struct);
+    if (!var->env_struct)
+        var->env_struct = env_null();
+    var->env = env;
+    var->exit_status = 0;
+    add_one_shlvl(var->env_struct);
+    tcgetattr(1, &var->infos);
+    return var;
+}
+
+int check_interactive_mode(void)
+{
+    if (!isatty(1) || !isatty(0))
+        exit(1);
+    return 1;
+}
+
+void setup_signals_and_terminal(void)
+{
+    desable_echo_term();
+    signal(SIGINT, handel_signal);
+    signal(SIGQUIT, SIG_IGN);
+}
+
+char *get_user_input(t_cmd *cmd)
+{
+    char *input;
+    
+    input = readline("minishell $> ");
+    if (!input)
+    {
+        printf("exit\n");
+        if (!cmd || !cmd->data.exit_status)
+            exit(0);
+        exit(cmd->data.exit_status);
+    }
+    add_history(input);
+    return input;
+}
+
+char *process_input(char *input, int *should_continue)
+{
+    char *preprocessed_input;
+    
+    if (check_quotes(input))
+    {
+        get_or_set(SET, 258);
+        free(input);
+        *should_continue = 1;
+        return NULL;
+    }
+    preprocessed_input = preprocess_command(input);
+    if (!preprocessed_input)
+    {
+        free(input);
+        *should_continue = 1;
+        return NULL;
+    }
+    free(input);
+    *should_continue = 0;
+    return preprocessed_input;
+}
 
 
-//  handl_sigee(int sig)
-//  {
-// 	(void)sig;
-// 	ft_putstr_fd("\n", 1);
-//  }
+t_token *create_token_list(char *preprocessed_input)
+{
+    char *new_input;
+    t_token *token_list;
+    
+    new_input = change_space(preprocessed_input);
+    token_list = tokin_list_maker(new_input);
+    free(preprocessed_input);
+    return token_list;
+}
+
+void execute_command(t_token *token_list, t_shell_var *state)
+{
+    t_cmd *cmd;
+    
+    cmd = parser(token_list);
+    split_stoper(cmd);
+    free_token_list(token_list);
+    check_sig(cmd);
+    expand_handle(cmd, state->env_struct, get_or_set(GET, 0));
+    ambiguous_finder(cmd);
+    process_quotes_for_cmd(cmd, 1);
+    change_back_cmd(cmd);
+    file_opener(cmd, state->env_struct);
+    print_ambiguous_redir_errors(cmd);
+    check_line(&cmd, &state->env_struct, state->env);
+    free_cmd_list(cmd);
+    global_sig = 0;
+}
+
+
+void process_tokens(t_token *token_list,  t_shell_var *state)
+{
+    int has_pipe_error;
+    int has_syntax_error;
+    
+    if (!token_list)
+        return;
+    
+    has_pipe_error = error_pipi(token_list);
+    has_syntax_error = check_syntax_errors(token_list);
+    
+    if (!has_pipe_error && !has_syntax_error)
+    {
+        execute_command(token_list, state);
+    }
+    else if (has_pipe_error || has_syntax_error)
+    {
+        get_or_set(SET, 258);
+        free_token_list(token_list);
+    }
+    else
+    {
+        free_token_list(token_list);
+    }
+}
+
+
+void shell_loop(t_shell_var *state)
+{
+    char *input;
+    char *preprocessed_input;
+    t_token *token_list;
+    int should_continue;
+    t_cmd *cmd = NULL;
+    
+    while (1)
+    {
+        setup_signals_and_terminal();
+        input = get_user_input(cmd);
+        preprocessed_input = process_input(input, &should_continue);
+        if (should_continue)
+            continue;
+        token_list = create_token_list(preprocessed_input);
+        process_tokens(token_list, state);
+        tcsetattr(1, TCSANOW, &state->infos);
+    }
+}
+
+
+void cleanup_shell(t_shell_var *state)
+{
+    if (state)
+    {
+        free_env_struct(state->env_struct);
+        free(state);
+    }
+}
+
 int main(int argc, char *argv[], char *env[])
 {
-	struct termios infos;
-	t_token *token_list;
-	t_env *env_struct = NULL;
-	char *input;
-	t_cmd *cmd = NULL;
-	char *preprocessed_input;
-	int exit_status;
-
-	token_list = NULL;
-	(void)argc;
-	(void)argv;
-	env_struct = env_maker(env, &env_struct);
-	if (!env_struct)
-	{
-		env_struct = env_null();
-	}
-	if(!isatty(1) || !isatty(0))
-	{
-		exit(1);
-	}
-	add_one_shlvl(env_struct);
-	tcgetattr(1, &infos);
-	while (1)
-	{
-		desable_echo_term();
-		signal(SIGINT, handel_signal);
-		signal(SIGQUIT, SIG_IGN);
-		input = readline("minishell $> ");
-		if (!input)
-		{
-			printf("exit\n");
-			if(!cmd || !cmd->data.exit_status)
-				exit(0);
-			exit(cmd->data.exit_status);
-		}
-		// if (global_sig == 2 && input[0] == '\0')
-		// {
-		// 	global_sig = 0;
-		// 	free(input);
-		// 	continue;
-		// 	puts("lll");
-		// }
-		add_history(input);
-		if (check_quotes(input))
-		{
-			exit_status = get_or_set(SET, 258);
-			free(input);
-			continue;
-		}
-		preprocessed_input = preprocess_command(input); 
-		if (!preprocessed_input)
-		{
-			if (input != NULL)
-			{
-				free(input);
-			}
-			continue;
-		}
-		free(input);
-		char *new_input = change_space(preprocessed_input); 
-		token_list = tokin_list_maker(new_input);
-		free(preprocessed_input);
-		if (token_list && !error_pipi(token_list) && !check_syntax_errors(token_list))
-		{
-			cmd = parser(token_list);
-			split_stoper(cmd);
-			free_token_list(token_list);
-			check_sig(cmd);
-			expand_handle(cmd, env_struct, get_or_set(GET, 0));
-			ambiguous_finder(cmd);
-			process_quotes_for_cmd(cmd, 1);
-			change_back_cmd(cmd);
-			file_opener(cmd, env_struct);
-			print_ambiguous_redir_errors(cmd);
-			print_cmd(cmd);
-			check_line(&cmd, &env_struct, env);
-			free_cmd_list(cmd);
-			global_sig = 0;
-		}
-		else if (error_pipi(token_list)  || check_syntax_errors(token_list))/// must stay
-			exit_status = get_or_set(SET, 258); /// must stay
-		else if (token_list)/// must stay
-		{
-			free_token_list(token_list);/// must stay
-		}
-		tcsetattr(1, TCSANOW, &infos);
-		// free(input);
-		// free_token_list(token_list);
-	}
-	free_env_struct(env_struct);
-	return 0;
+    t_shell_var *var;
+    
+    (void)argc;
+    (void)argv;
+    check_interactive_mode();
+    var = init_shell(env);
+    if (!var)
+        return 1;
+    shell_loop(var);
+    cleanup_shell(var);
+    return 0;
 }
