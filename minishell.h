@@ -24,6 +24,7 @@ typedef struct s_shell_var
 void execute_single_command(t_cmd *cmd, t_env **list_env, char *env[]);
 void excute_builting(t_cmd **command, t_env **env_list, char *env[]);
 int is_builtin(char **args);
+t_shell_var *init_shell(char **env);
 // #define SET 0
 // #define GET 1
 

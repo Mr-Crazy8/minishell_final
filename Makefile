@@ -15,14 +15,14 @@ SRCS = exc_cmd.c  libft_utils.c echo.c \
 		parsing/expand_utils_8.c        parsing/lexer.c                 parsing/parser_0.c      \
 		parsing/parsing_utiles.c        parsing/struc_maker.c										\
 		parsing/add_back_func.c         parsing/expand_utils.c          parsing/expand_utils_9.c   \
-		parsing/lexer_helper_0.c        parsing/parser_helper.c         parsing/parsing_utiles_2.c  parsing/syntx_check.c \
+		parsing/lexer_helper_0.c        parsing/parser_helper.c           parsing/syntx_check.c \
 		parsing/debugging_tools.c       parsing/expand_utils_4.c        parsing/free_func.c             parsing/lexer_helper_1.c   \
 		parsing/parser_helper_2.c       parsing/parsing_utiles_3.c      parsing/syntx_check_helper_0.c    \
 		parsing/expand.c                parsing/expand_utils_5.c        parsing/free_func_1.c           parsing/open_files.c      \
 		parsing/parser_helper_3.c       parsing/parsing_utiles_4.c      parsing/syntx_check_helper_1.c                          \
 		parsing/expand_helper_0.c       parsing/expand_utils_6.c        parsing/ft_itoa.c               parsing/open_files_helper.c  \
 		parsing/parser_helper_4.c       parsing/parsing_utiles_5.c \
-		heredoc_helper_0.c  heredoc_helper_1.c  heredoc_helper_2.c heredoc_helper_3.c parsing/parsing_utiles_2.c
+		heredoc_helper_0.c  heredoc_helper_1.c  heredoc_helper_2.c heredoc_helper_3.c  parsing/add_shlvl_node.c  parsing/find_last_node.c parsing/add_one_shlvl.c
 		
 # Object files
 OBJS = $(SRCS:.c=.o)

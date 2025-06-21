@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:35:13 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/21 11:51:51 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:24:54 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,6 +257,7 @@ void execute_command(t_token *token_list, t_shell_var *state)
     split_stoper(cmd);
     free_token_list(token_list);
     check_sig(cmd);
+    print_cmd(cmd);
     expand_handle(cmd, state->env_struct, get_or_set(GET, 0));
     ambiguous_finder(cmd);
     process_quotes_for_cmd(cmd, 1);

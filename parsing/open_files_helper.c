@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 11:32:18 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/20 21:32:03 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:06:59 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,9 @@ void	print_and_set_error(char *file, t_cmd *cmd, int error_type)
 	print_file_error(file, error_type);
 	cmd->data.exit_status = get_or_set(SET, 1);
 }
-int count_here_doc(t_cmd *cmd)
-{
-	t_cmd *tmp;
-	t_redir *tp;
-	int count;
-	tmp = cmd;
 
-	tp = tmp->redirs;
-	count = 0;
-	while (tmp)
-	{
-		while (tp)
-		{
-			if (tp->type == 3)
-			 count++;
-			tp = tp->next;
-		}
-		tmp = tmp->next;
-	}
-	
-}
 void	handle_file_type(int type, char *file, int *fd, t_cmd *cmd)
 {
-	int heredoc_count;
-
-	heredoc_count = count_here_doc(cmd);
 	if (type == 0)
 	{
 		fd[0] = open(file, O_RDONLY);

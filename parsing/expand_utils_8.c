@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:08:09 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/20 20:51:49 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:42:59 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,30 +102,31 @@ t_exp_helper	*alloc_expand(void)
 	return (expand);
 }
 
-char *change_space(char *str)
+char	*change_space(char *str)
 {
-    int i = 0;
-    int quote_state = 0;
-    
-    while(str && str[i])
-    {
-        if (str[i] == '\'')
-        {
-            if (quote_state == 0)
-                quote_state = 1;
-            else if (quote_state == 1)
-                quote_state = 0;
-        }
-        else if (str[i] == '"')
-        {
-            if (quote_state == 0)
-                quote_state = 2;
-            else if (quote_state == 2)
-                quote_state = 0;
-        }
-        if (str[i] >= 9 && str[i] <=13 && quote_state == 0)
-            str[i] = ' ';
-        i++;
-    }
-    return str;
+	int	i;
+	int	quote_state;
+
+	i = 0;
+	quote_state = 0;
+	while (str && str[i])
+	{
+		if (str[i] == '\'')
+		{
+			if (quote_state == 0)
+				quote_state = 1;
+			else if (quote_state == 1)
+				quote_state = 0;
+		}
+		else if (str[i] == '"')
+		{
+			if (quote_state == 0)
+				quote_state = 2;
+			else if (quote_state == 2)
+				quote_state = 0;
+		}
+		change_space_helper(str, &quote_state, &i);
+		i++;
+	}
+	return (str);
 }

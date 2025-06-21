@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 16:46:36 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/21 14:53:49 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/21 16:05:07 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ typedef struct s_exp_helper
 	int		had_removed_var;
 }	t_exp_helper;
 
-char *change_space(char *str);
+char			*change_space(char *str);
 void			cmd_extra_helper(char *str,
 					t_extra_param	*extra_param, char *quote);
 void			processed_cmd(t_cmd *current, char	*processed);
@@ -276,23 +276,24 @@ int				error_pipi(t_token *token_list);
 int				check_syntax_errors(t_token *token_list);
 int				get_or_set(int type, int status);
 int				is_valid_key(char *key);
-void add_one_shlvl(t_env *env);
-char *split_helper(char *str, char *befor, int exp);
-char *handle_split_processing(char **split, char *str);
-char *process_valid_assignment(char **split, char *new_key);
-char *create_simple_assignment(char *key, char *value, char **split, char *new_key);
-char *create_quoted_value(char *value, char **split, char *new_key);
-void cleanup_joins(char *join1, char *join2, char *join3);
-void cleanup_split_key(char **split, char *new_key);
-void cle1(char *join1, char *join2, char *join3);
-void cle0(char **split, char *new_key);
-char *plus_checker(char *str);
-char **extract(char *str);
-void free_extract_result(char **split);
-void split_stoper_hp(t_cmd *tmp, int *i, int *exp);
-void split_stoper(t_cmd *cmd);
-char *chenger_back(char *str);
-void change_back_cmd(t_cmd *cmd);
+void			add_one_shlvl(t_env *env);
+char			*split_helper(char *str, char *befor, int exp);
+char			*handle_split_processing(char **split, char *str);
+char			*process_valid_assignment(char **split, char *new_key);
+char			*create_simple_assignment(char *key, char *value,
+					char **split, char *new_key);
+char			*create_quoted_value(char *value, char **split, char *new_key);
+void			cleanup_joins(char *join1, char *join2, char *join3);
+void			cleanup_split_key(char **split, char *new_key);
+void			cle1(char *join1, char *join2, char *join3);
+void			cle0(char **split, char *new_key);
+char			*plus_checker(char *str);
+char			**extract(char *str);
+void			free_extract_result(char **split);
+void			split_stoper_hp(t_cmd *tmp, int *i, int *exp);
+void			split_stoper(t_cmd *cmd);
+char			*chenger_back(char *str);
+void			change_back_cmd(t_cmd *cmd);
 int				rebuild_cmd_args(char **new_args, t_cmd *current, char **split,
 					t_add_int	*two_numbers);
 int				skip_redirections(char *str);
@@ -317,26 +318,29 @@ t_quote_params	*add_quote_params(char *new_str, int remove_mode);
 t_split_helper	*split_param(size_t *i, size_t *j, size_t *start);
 t_extra_param	*init_extra_param(char *result,
 					int *i, int *result_len, int *quote_state);
-t_env *find_last_node(t_env *env);
-void add_shlvl_node(t_env *env);
-void split_stoper_hp(t_cmd *tmp, int *i, int *exp);
-void split_stoper(t_cmd *cmd);
-char *chenger_back(char *str);
-void change_back_cmd(t_cmd *cmd);
-void free_extract_result(char **split);
-char **extract(char *str);
-char *plus_checker(char *str);
-void cle0(char **split, char *new_key);
-void cle1(char *join1, char *join2, char *join3);
-void cleanup_split_key(char **split, char *new_key);
-void cleanup_joins(char *join1, char *join2, char *join3);
-void clean_hp(char *join1, char *join2, char **split, char new_key);
-char *create_quoted_value(char *value, char **split, char *new_key);
-char *create_simple_assignment(char *key, char *value, char **split, char *new_key);
-char *process_valid_assignment(char **split, char *new_key);
-char *handle_split_processing(char **split, char *str);
-char *split_helper(char *str, char *befor, int exp);
-t_env *find_shlvl_node(t_env *env);
-void update_shlvl_value(t_env *shlvl_node);
-t_env *create_shlvl_node(void);
+t_env			*find_last_node(t_env *env);
+void			add_shlvl_node(t_env *env);
+void			split_stoper_hp(t_cmd *tmp, int *i, int *exp);
+void			split_stoper(t_cmd *cmd);
+char			*chenger_back(char *str);
+void			change_back_cmd(t_cmd *cmd);
+void			free_extract_result(char **split);
+char			**extract(char *str);
+char			*plus_checker(char *str);
+void			cle0(char **split, char *new_key);
+void			cle1(char *join1, char *join2, char *join3);
+void			cleanup_split_key(char **split, char *new_key);
+void			cleanup_joins(char *join1, char *join2, char *join3);
+void			clean_hp(char *join1, char *join2, char **split, char *new_key);
+char			*create_quoted_value(char *value, char **split, char *new_key);
+char			*create_simple_assignment(char *key, char *value,
+					char **split, char *new_key);
+char			*process_valid_assignment(char **split, char *new_key);
+char			*handle_split_processing(char **split, char *str);
+char			*split_helper(char *str, char *befor, int exp);
+t_env			*find_shlvl_node(t_env *env);
+void			update_shlvl_value(t_env *shlvl_node);
+t_env			*create_shlvl_node(void);
+void			change_space_helper(char *str, int	*quote_state, int *i);
+
 #endif
