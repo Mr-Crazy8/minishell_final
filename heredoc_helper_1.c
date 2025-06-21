@@ -6,7 +6,7 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 11:55:34 by anel-men          #+#    #+#             */
-/*   Updated: 2025/06/20 12:06:39 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/20 21:44:39 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,16 @@ int	*heredoc_opener(void)
 		fd_heredoc[1] = open(random_name, O_CREAT | O_RDONLY, 0644);
 		unlink(random_name);
 		free(random_name);
+
+		if (fd_heredoc[0] < 0 || fd_heredoc[1] < 0)
+        {
+            if (fd_heredoc[0] >= 0)
+                close(fd_heredoc[0]);
+            if (fd_heredoc[1] >= 0)
+                close(fd_heredoc[1]);
+            free(fd_heredoc);
+            return NULL;
+        }
 	}
 	return (fd_heredoc);
 }

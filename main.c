@@ -6,307 +6,13 @@
 /*   By: anel-men <anel-men@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:35:13 by ayoakouh          #+#    #+#             */
-/*   Updated: 2025/06/20 21:37:23 by anel-men         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:51:51 by anel-men         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void split_stoper(t_cmd *cmd)
-{
-    t_cmd *tmp;
-    char *new_str;
-    int exp = 0;
-    
-    if (!cmd)
-        return;
-        
-    tmp = cmd;
-    while(tmp)
-    {
-        int i = 0;
-        exp = 0; 
-        
-        while (tmp->args && tmp->args[i])
-        {
-            if (i == 0 && tmp->args[i] && strcmp(tmp->args[i], "export") == 0) 
-                exp = 1;
-            if (tmp->args_befor_quotes_remover && tmp->args_befor_quotes_remover[i])
-            {
-                new_str = split_helper(tmp->args[i], tmp->args_befor_quotes_remover[i], exp);
-                if (new_str != NULL)
-                {
-                    free(tmp->args[i]);
-                    tmp->args[i] = new_str;
-                }
-            }
-            i++;
-        }
-        tmp = tmp->next;
-    }
-}
 
-
-char *chenger_back(char *str)
-{
-    int i = 0;
-
-    while (str && str[i])
-    {
-        if (str[i] == 3)
-            str[i] = '\'';
-        else if (str[i] == 4)
-            str[i] = '\"';
-        i++;
-    }
-    return str;
-}
-
-void change_back_cmd(t_cmd *cmd)
-{
-    t_cmd *tmp;
-    int i = 0;
-    tmp = cmd;
-
-    while (tmp)
-    {
-        i = 0;
-        while (tmp->args[i])
-        {
-            tmp->args[i] = chenger_back(tmp->args[i]);
-            i++;
-        }
-        tmp->cmd = chenger_back(tmp->cmd);
-        i = 0;
-        t_redir *tp = tmp->redirs;
-        while (tp)
-        {
-            tp->file = chenger_back(tp->file);
-            tp = tp->next;
-        }
-        tmp = tmp->next;
-    }
-}
-
-void free_extract_result(char **split)
-{
-    if (!split)
-        return;
-    
-    if (split[0])
-        free(split[0]);
-    if (split[1])
-        free(split[1]);
-    free(split);
-}
-
-char **extract(char *str)
-{ 
-    int i = 0;
-    char *key;
-    char *value;
-    char **split = malloc(sizeof(char *) * 3);
-    
-    if (!split)
-        return NULL;
-    while (str && str[i] && str[i] != '=')
-        i++;
-    key = ft_substr(str, 0, i);
-    if (!key) 
-    {
-        free(split);
-        return NULL;
-    }
-    value = ft_substr(str, i+1, ft_strlen(str) - (i+1));
-    if (!value) 
-    {
-        free(key);
-        free(split);
-        return NULL;
-    }
-    split[0] = key;
-    split[1] = value;
-    split[2] = NULL;
-    
-    return split;
-}
-char *plus_checker(char *str)
-{
-    int i = 0;
-    
-    if (!str)
-        return str;
-        
-    while (str[i])
-        i++;
-        
-    if (i > 0 && str[i - 1] == '+')
-        str[i - 1] = '\0';
-    return str;
-}
-
-
-char *split_helper(char *str, char *befor, int exp)
-{
-    char **split;
-    char *join1 = NULL;
-    char *join3 = NULL;
-    char *join4 = NULL;
-    char *join2 = NULL;
-    char *new_key = NULL;
-    
-    if (exp != 1)
-        return NULL;
-        
-    if (strchr(str, '=') != NULL)
-    {
-        split = extract(str);
-        if (split != NULL)
-        {
-            new_key = ft_strdup(split[0]);
-            if (!new_key)
-            {
-                free_extract_result(split);
-                return NULL;
-            }
-            
-            new_key = plus_checker(new_key);
-            if ((((strchr(split[0], '\'') == NULL && strchr(split[0], '\"') == NULL) && 
-                 strchr(split[0], '$') == NULL)) && is_valid_key(new_key) == 0)
-            {
-                if (split && split[1] && strchr(split[1], '$') != NULL)
-                {
-                    join1 = ft_strjoin("\"", split[1]);
-                    if (!join1) 
-                    {
-                        free(new_key);
-                        free_extract_result(split);
-                        return NULL;
-                    }
-                    join2 = ft_strjoin(join1, "\"");
-                    if (!join2) 
-                    {
-                        free(join1);
-                        free(new_key);
-                        free_extract_result(split);
-                        return NULL;
-                    }
-                    join3 = ft_strjoin("=", join2);
-                    if (!join3) 
-                    {
-                        free(join1);
-                        free(join2);
-                        free(new_key);
-                        free_extract_result(split);
-                        return NULL;
-                    }
-                    join4 = ft_strjoin(split[0], join3);
-                    if (!join4)
-                    {
-                        free(join1);
-                        free(join2);
-                        free(join3);
-                        free(new_key);
-                        free_extract_result(split);
-                        return NULL;
-                    }
-                    free(join1);
-                    free(join2);
-                    free(join3);
-                }
-                else
-                {
-                    join3 = ft_strjoin(split[0], "=");
-                    if (!join3) 
-                    {
-                        free(new_key);
-                        free_extract_result(split);
-                        return NULL;
-                    }
-                    join4 = ft_strjoin(join3, split[1]);
-                    if (!join4)
-                    {
-                        free(join3);
-                        free(new_key);
-                        free_extract_result(split);
-                        return NULL;
-                    }
-                    free(join3);
-                }
-            }
-            else
-            {
-                join4 = ft_strdup(str);
-                if (!join4)
-                {
-                    free(new_key);
-                    free_extract_result(split);
-                    return NULL;
-                }
-            }
-            free(new_key); 
-            free_extract_result(split);
-        }
-        else
-        {
-            join4 = ft_strdup(str);
-            if (!join4)
-                return NULL;
-        }
-    }
-    else
-    {
-        join4 = ft_strdup(str);
-        if (!join4)
-            return NULL;
-    }
-    return join4;    
-}
-
-void add_one_shlvl(t_env *env)
-{
-	t_env *tmp = env;
-	int shl_vl = 0;
-	int found = 0;
-
-	if (!env) 
-		return;
-	while (tmp) 
-	{
-		if (tmp->key && strcmp(tmp->key, "SHLVL") == 0)
-		{
-			found = 1;
-			if (tmp->value && tmp->value[0] != '\0')
-			{
-				shl_vl = atoi(tmp->value);
-				free(tmp->value);
-				tmp->value = NULL;
-			}
-			
-			shl_vl++; 
-			tmp->value = ft_itoa(shl_vl);
-			if (!tmp->value) 
-				tmp->value = strdup("1");
-			break;
-		}
-		tmp = tmp->next;
-	}
-	if (!found && env)
-	{
-		t_env *new_node = malloc(sizeof(t_env));
-		if (!new_node)
-			return;
-			
-		new_node->key = strdup("SHLVL");
-		new_node->value = strdup("1");
-		new_node->is_not_active = 0;
-		new_node->next = NULL;
-		tmp = env;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_node;
-	}
-}
 
 int global_sig = 0;
 
@@ -457,7 +163,11 @@ void check_sig(t_cmd *cmd)
 	}
 }
 
-int shell_mode(void)
+
+
+
+//------------main--------------//
+void shell_mode(void)
 {
 	if(!isatty(1) || !isatty(0))
 		exit(1);
@@ -469,7 +179,7 @@ t_shell_var *init_shell(char **env)
     
     var = malloc(sizeof(t_shell_var));
     if (!var)
-        return NULL;
+        return (NULL);
 	var->env_struct = NULL;
     var->env_struct = env_maker(env, &var->env_struct);
     if (!var->env_struct)
@@ -478,14 +188,7 @@ t_shell_var *init_shell(char **env)
     var->exit_status = 0;
     add_one_shlvl(var->env_struct);
     tcgetattr(1, &var->infos);
-    return var;
-}
-
-int check_interactive_mode(void)
-{
-    if (!isatty(1) || !isatty(0))
-        exit(1);
-    return 1;
+    return (var);
 }
 
 void setup_signals_and_terminal(void)
@@ -520,18 +223,18 @@ char *process_input(char *input, int *should_continue)
         get_or_set(SET, 258);
         free(input);
         *should_continue = 1;
-        return NULL;
+        return (NULL);
     }
     preprocessed_input = preprocess_command(input);
     if (!preprocessed_input)
     {
         free(input);
         *should_continue = 1;
-        return NULL;
+        return (NULL);
     }
     free(input);
     *should_continue = 0;
-    return preprocessed_input;
+    return (preprocessed_input);
 }
 
 
@@ -543,7 +246,7 @@ t_token *create_token_list(char *preprocessed_input)
     new_input = change_space(preprocessed_input);
     token_list = tokin_list_maker(new_input);
     free(preprocessed_input);
-    return token_list;
+    return (token_list);
 }
 
 void execute_command(t_token *token_list, t_shell_var *state)
@@ -578,22 +281,18 @@ void process_tokens(t_token *token_list,  t_shell_var *state)
     has_syntax_error = check_syntax_errors(token_list);
     
     if (!has_pipe_error && !has_syntax_error)
-    {
         execute_command(token_list, state);
-    }
     else if (has_pipe_error || has_syntax_error)
     {
         get_or_set(SET, 258);
         free_token_list(token_list);
     }
     else
-    {
         free_token_list(token_list);
-    }
 }
 
 
-void shell_loop(t_shell_var *state)
+void minishell_loop(t_shell_var *state)
 {
     char *input;
     char *preprocessed_input;
@@ -615,7 +314,7 @@ void shell_loop(t_shell_var *state)
 }
 
 
-void cleanup_shell(t_shell_var *state)
+void cleanup_minishell(t_shell_var *state)
 {
     if (state)
     {
@@ -630,11 +329,11 @@ int main(int argc, char *argv[], char *env[])
     
     (void)argc;
     (void)argv;
-    check_interactive_mode();
+    shell_mode();
     var = init_shell(env);
     if (!var)
-        return 1;
-    shell_loop(var);
-    cleanup_shell(var);
-    return 0;
+        return (1);
+    minishell_loop(var);
+    cleanup_minishell(var);
+    return (0);
 }
