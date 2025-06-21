@@ -1,8 +1,3 @@
-parsing/add_back_func.c: OK!
-parsing/add_one_shlvl.c: OK!
-parsing/add_shlvl_node.c: OK!
-parsing/Ambiguous.c: OK!
-parsing/Ambiguous_helper.c: OK!
 parsing/debugging_tools.c: Error!
 Error: INVALID_HEADER       (line:   1, col:   1):	Missing or invalid 42 header
 Error: CONSECUTIVE_SPC      (line:   3, col:  42):	Two or more consecutives spaces
@@ -168,41 +163,3 @@ Error: SPC_BEFORE_NL        (line: 100, col:   8):	Space before newline
 Error: TOO_MANY_LINES       (line: 101, col:   1):	Function has more than 25 lines
 Error: CONSECUTIVE_NEWLINES (line: 103, col:   1):	Consecutive newlines
 Error: EMPTY_LINE_EOF       (line: 103, col:   1):	Empty line at end of file
-parsing/expand.c: OK!
-parsing/expand_helper_0.c: OK!
-parsing/expand_helper_1.c: OK!
-parsing/expand_helper_10.c: OK!
-parsing/expand_utils.c: OK!
-parsing/expand_utils_4.c: OK!
-parsing/expand_utils_5.c: OK!
-parsing/expand_utils_6.c: OK!
-parsing/expand_utils_7.c: OK!
-parsing/expand_utils_8.c: OK!
-parsing/expand_utils_9.c: OK!
-parsing/find_last_node.c: OK!
-parsing/free_func.c: OK!
-parsing/free_func_1.c: OK!
-parsing/ft_itoa.c: OK!
-parsing/ft_split.c: OK!
-parsing/lexer.c: OK!
-parsing/lexer_helper_0.c: OK!
-parsing/lexer_helper_1.c: OK!
-parsing/open_files.c: OK!
-parsing/open_files_helper.c: OK!
-parsing/parser.c: OK!
-parsing/parser_0.c: OK!
-parsing/parser_helper.c: OK!
-parsing/parser_helper_2.c: OK!
-parsing/parser_helper_3.c: OK!
-parsing/parser_helper_4.c: OK!
-parsing/parsing.h: OK!
-parsing/parsing_main.c: OK!
-parsing/parsing_utiles.c: OK!
-parsing/parsing_utiles_3.c: OK!
-parsing/parsing_utiles_4.c: OK!
-parsing/parsing_utiles_5.c: OK!
-parsing/parsing_utiles_6.c: OK!
-parsing/struc_maker.c: OK!
-parsing/syntx_check.c: OK!
-parsing/syntx_check_helper_0.c: OK!
-parsing/syntx_check_helper_1.c: OK!
